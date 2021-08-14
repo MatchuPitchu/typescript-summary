@@ -1,0 +1,15 @@
+{
+  "name": "30.2_typescript-tutorial",
+  "version": "1.0.0",
+  "description": "- https://www.youtube.com/watch?v=BwuLxPH8IDs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
