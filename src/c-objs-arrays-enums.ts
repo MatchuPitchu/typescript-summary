@@ -7,7 +7,7 @@
 // const READ_ONLY = 1;
 // const AUTHOR = 2;
 
-// by convention, enums are writte with all-uppercase values
+// by convention, enums are written with all-uppercase values
 // now it's a enumerated list "ADMIN" = 0 ...
 // starting num can be changed with ADMIN = 5 on first identifier
 // can also define every num on my own or assign strings like ADMIN = "Admin" ...

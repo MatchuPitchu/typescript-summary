@@ -48,7 +48,12 @@ TypeScript's type system only helps during development (i.e. before the code get
 - object: { age: 30 }
 - array: [1, 2, 3]
 - Tuple: [1, 2] - fixed-length array; definition would be i.e. role: [number, string]
-- Enum: enum { NEW, OLD } - only exists in TS, not in JS; automatically enumerated global constant identifiers; so when I need identifiers that are human readable^
+- Enum: enum { NEW, OLD } - only exists in TS, not in JS; automatically enumerated global constant identifiers; so when I need identifiers that are human readable
+
+```JavaScript
+enum Role { ADMIN, READ_ONLY, AUTHOR };
+```
+
 - any: \* - any kind of value, no specific type assignment; avoid it because it gives away all advantages of TS
 - unknown: is the type-safe counterpart of any. Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing (siehe example in coding file)
 - void: void can be declared as the return type of a function, that means that function has no return statement; example:
