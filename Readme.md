@@ -5,6 +5,7 @@
 # Official TypeScript Website
 
 - https://www.typescriptlang.org/
+- Basic Types: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 
 # Useful Commands for CLI and Compiling
 
@@ -37,6 +38,24 @@
     "components" // folder
   ]
 ```
+
+# Primitive Types and Reference Types
+
+- Primitives: const, let, var, strings, booleans, undefined, null
+- Reference Types: objects, arrays
+- What is the difference:
+  - related to memory management: JS knows two types of memory: Stack and Heap
+  - stack: easy-to-access memory that simply manages its items as a stack. Only items for which the size is known in advance can go onto the stack. This is the case for numbers, strings, booleans.
+  - heap: memory for items of which you can’t pre-determine the exact size and structure. Since objects and arrays can be mutated and change at runtime, they have to go into the heap therefore.
+  - For each heap item, the exact address is stored in a pointer which points at the item in the heap. This pointer in turn is stored on the stack.
+  ```JavaScript
+  let person = { name: 'Matchu' }
+  let newPerson = person
+  newPerson.name = 'Pitchu'
+  // This prints 'Pitchu' because I never copied person obj itself to newPerson
+  // only copied the pointer; it points still at the same address in memory
+  console.log(person.name)
+  ```
 
 # Core Types in TypeScript
 
