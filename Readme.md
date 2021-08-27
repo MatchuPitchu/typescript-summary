@@ -119,3 +119,21 @@ const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
 ```JavaScript
 const testBtn = document.getElementById('testBtn')!;
 ```
+
+# Classes and TypeScript - Summary of TS file
+
+- define properties, methods and constructor
+- "this" keyword to refer to the object itself
+- creation of new instance of a class (-> a new obj based on a class)
+- "private", "protected" and "public" (is the default) Access Modifiers: mark properties and methods with these keywords
+  - "private": means that is only accessible from inside the class / from inside the created object
+  - "protected": means like "private" + also in any class that "extends" this class
+  - "public": I can access it from outside and manipulate it
+- Shorthand Initialization: in order to not repeat, don't need property creation (f.e. "name: string", "id: string") AND "this.name = name", "this.id = id" in constructor function; only need private or public and wished variable names as parameters in constructor function
+- "readonly" properties: not allowed to change after initialization
+- inheritance: inherit main class to another subtype class using "extends" keyword;
+- overriding properties and methods of base class: possible in every subtype class with new declaration of properties or methods
+- getters & setters
+- static properties & methods with "static" keyword: allows you to add properties & methods to classes which are not accessed on an instance of the class, so I don't need to call first new ClassName and save this in a constant; I access static methods & properties directly on the class; Example: Math constructor function or globally available function
+- abstract classes: usefull if I want to enforce that all classes based on one class share some common methods and properties;
+- singletons & private constructors: to make sure that I can only create one obj based on this class
