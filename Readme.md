@@ -1,11 +1,14 @@
 # Video Tutorial
 
-- https://www.youtube.com/watch?v=BwuLxPH8IDs
+> https://www.youtube.com/watch?v=BwuLxPH8IDs
+
+> https://pro.academind.com/courses/enrolled/762406
 
 # Official TypeScript Website
 
-- https://www.typescriptlang.org/
-- Basic Types: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+> https://www.typescriptlang.org/
+
+> Basic Types: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 
 # Useful Commands for CLI and Compiling
 
@@ -69,7 +72,7 @@ TypeScript's type system only helps during development (i.e. before the code get
 - Tuple: [1, 2] - fixed-length array; definition would be i.e. role: [number, string]
 - Enum: enum { NEW, OLD } - only exists in TS, not in JS; automatically enumerated global constant identifiers; so when I need identifiers that are human readable
 
-```JavaScript
+```TypeScript
 enum Role { ADMIN, READ_ONLY, AUTHOR };
 ```
 
@@ -77,13 +80,13 @@ enum Role { ADMIN, READ_ONLY, AUTHOR };
 - unknown: is the type-safe counterpart of any. Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing (siehe example in coding file)
 - void: void can be declared as the return type of a function, that means that function has no return statement; example:
 
-```JavaScript
+```TypeScript
 function add(num: number): void { console.log(num)};
 ```
 
 - never Type: indicates the values that will never occur. The never type is used when you are sure that something is never going to occur. For example, you write a function which will not return to its end point or always throws an exception. example:
 
-```JavaScript
+```TypeScript
 const generateError = (message: string, code: number): never => {
   throw { message: message, errorCode: code };
 }
@@ -95,19 +98,19 @@ const generateError = (message: string, code: number): never => {
 
 - Function Return Types: define the return type of a function; example:
 
-```JavaScript
+```TypeScript
 function add(num: number): number { }
 ```
 
 - Function Types: define type(s) of parameters of function and type of return of function; so only function which fulfills types can be stored in a variable; example: ,
 
-```JavaScript
+```TypeScript
 let combineValues: (a: number, b: number) => number
 ```
 
 - Function Types and Callbacks: define in parameters of a function the type of a callback function; example:
 
-```JavaScript
+```TypeScript
 const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
   const result = n1 + n2;
   cb(result);
@@ -116,11 +119,13 @@ const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
 
 - ! - tells TS that I know that testBtn exists and that this is not null
 
-```JavaScript
+```TypeScript
 const testBtn = document.getElementById('testBtn')!;
 ```
 
 # Classes and TypeScript - Summary of TS file
+
+> More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 
 - define properties, methods and constructor
 - "this" keyword to refer to the object itself
@@ -137,3 +142,55 @@ const testBtn = document.getElementById('testBtn')!;
 - static properties & methods with "static" keyword: allows you to add properties & methods to classes which are not accessed on an instance of the class, so I don't need to call first new ClassName and save this in a constant; I access static methods & properties directly on the class; Example: Math constructor function or globally available function
 - abstract classes: usefull if I want to enforce that all classes based on one class share some common methods and properties;
 - singletons & private constructors: to make sure that I can only create one obj based on this class
+
+# Interfaces - Summary of TS file
+
+> More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
+
+- interfaces describes how an object looks like (-> it's like a custom type to type check an obj later)
+
+```TypeScript
+interface InterfaceName {
+  propertyName: string;
+  functionName(parameter1: number, parameter2: boolean): number | void;
+}
+
+```
+
+- using interfaces with classes: to share the structure of functionalities among different classes -> to enforce that the property and function structure is at least inside a certain class, but of course more can also be added in the respective class;
+
+```TypeScript
+class ClassName implements FirstInterface, AnotherInterface {
+```
+
+- extending interfaces: combine interfaces with "extends" like for classes; extend with more than one interface with comma separation
+
+```TypeScript
+interface FirstInterface extends AnotherInterface {
+  // wished structure
+}
+```
+
+- interfaces as an alternative to function types
+
+  - function type definition:
+
+  ```TypeScript
+  type AddFn = (a: number, b: number) => number;
+  ```
+
+  - interface definition with anonymous function
+
+  ```TypeScript
+  interface AddFn {
+    (a: number, b: number): number;
+  }
+  ```
+
+- optional parameters & properties: use question mark (?) to tell TS that property might exist BUT it doesn't have to
+
+```TypeScript
+interface FirstInterface {
+  readonly property?: string;
+}
+```

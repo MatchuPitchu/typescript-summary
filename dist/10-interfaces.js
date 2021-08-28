@@ -27,4 +27,4 @@ let add6;
 add6 = (n1, n2) => {
     return n1 + n2;
 };
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=10-interfaces.js.map

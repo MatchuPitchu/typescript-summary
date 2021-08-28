@@ -1,4 +1,4 @@
-// Classes & Interfaces
+// Classes
 
 abstract class Department {
   // 1) to define here an id, name etc of a key is only support in very modern JS (look at TS to JS compilation file)
