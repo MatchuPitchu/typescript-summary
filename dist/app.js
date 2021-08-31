@@ -1,30 +1,79 @@
 "use strict";
-let user1;
-user1 = {
+var _a;
+const e1 = {
     name: 'Matchu',
-    age: 36,
-    greet(phrase) {
-        console.log(phrase + ' ' + this.name);
+    privileges: ['create-server', 'delete database'],
+    startDate: new Date(),
+};
+function add7(a, b) {
+    if (typeof a === 'string' || typeof b === 'string')
+        return a.toString() + b.toString();
+    return a + b;
+}
+const result = add7('Matchu', 'Pitchu');
+result.split(' ');
+const printEmployeeInformation = (emp) => {
+    console.log('Name: ' + emp.name);
+    if ('privileges' in emp) {
+        console.log('Privileges: ' + emp.privileges);
+    }
+    if ('startDate' in emp) {
+        console.log('Start Date: ' + emp.startDate);
     }
 };
-user1.greet('Hi, here is');
-class Person {
-    constructor(n) {
-        this.age = 36;
-        if (n)
-            this.name = n;
-    }
-    greet(phrase) {
-        if (this.name)
-            console.log(phrase + ' ' + this.name);
-        else
-            console.log('Hey');
+printEmployeeInformation(e1);
+class Car {
+    drive() {
+        console.log('Driving a car');
     }
 }
-const user2 = new Person('Pitchu');
-user2.greet('Holà');
-let add6;
-add6 = (n1, n2) => {
-    return n1 + n2;
+class Truck {
+    drive() {
+        console.log('Driving a truck');
+    }
+    loadCargo(amount) {
+        console.log('Loading cargo: ' + amount);
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
+const useVehicle = (vehicle) => {
+    vehicle.drive();
+    if (vehicle instanceof Truck) {
+        vehicle.loadCargo(1000);
+    }
 };
+useVehicle(v1);
+useVehicle(v2);
+const moveAnimal = (animal) => {
+    let speed;
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed;
+            break;
+    }
+    console.log('Moving speed: ' + speed);
+};
+moveAnimal({ type: 'bird', flyingSpeed: 10 });
+const userInputElement = document.getElementById('user-input');
+userInputElement.value = 'Hello';
+const errorMsg = {
+    email: 'Not a valid email',
+    username: 'Not a valid username'
+};
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Matchu',
+    job: {
+        title: 'CEO',
+        description: 'Vegan Ice Cream App',
+    }
+};
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+const userInput2 = 0;
+const storedData = userInput2 !== null && userInput2 !== void 0 ? userInput2 : 'DEFAULT';
+console.log(storedData);
 //# sourceMappingURL=app.js.map
