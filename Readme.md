@@ -296,3 +296,71 @@ TypeScript's type system only helps during development (i.e. before the code get
   ```TypeScript
   const storedData = userInput2 ?? 'DEFAULT';
   ```
+
+# Generic Types
+
+- gives flexibility: regarding the values I pass in a function or I use in a class
+- combined with type safety: I get full type support what I do with the class or the result of a generic function
+
+- Built-in Generics are main types (like Array, Object, Promise ...) that allow a variety of data types rather than a single data type; generic type parameter is specified in angle brackets `const names: Array<string> = ['Matchu']`
+
+- Generic Functions: thanks to generic definition TS infers dynamically the types of the arguments used in the function AND TS knows that return of function is the intersection of T & U;
+
+  - T, U and so on in alphabetical order is a convention
+  - Working with Constraints: keyword "extends" restricts the dynamically set types of T and U to be objects
+    ```TypeScript
+    const merge = <T extends object, U extends object>(objA: T, objB: U) => Object.assign(objA, objB);
+    ```
+  - use an interface to indicate TS that every element based on it has a certain property; can also precise the return of this function
+    ```TypeScript
+    interface Lenghty {
+      length: number
+    }
+    const countAndDescribe = <T extends Lenghty>(element: T): [T, string] => {
+      // function logic
+    }
+    ```
+  - "keyof" Constraint: use keyword "keyof" to ensure that key exists in object
+    ```TypeScript
+    const extractAndConvert = <T extends object, U extends keyof T>(obj: T, key: U) => {
+      return console.log(`Value: ${obj[key]}`);
+    }
+    ```
+
+- Generic Classes: use generic type T and use it for property "data" that this will be and Array (-> T[])
+
+  ```TypeScript
+  class DataStorage<T extends string | number | boolean> {
+    private data: T[] = [];
+  }
+  const textStorage = new DataStorage<string>();
+  const numberStorage = new DataStorage<number>();
+  // ...
+  ```
+
+- Generic Utility Types:
+
+  > handy built-in utility types: https://www.typescriptlang.org/docs/handbook/utility-types.html
+
+  - Partial Type: wraps my own created type / interface and sets all properties as optional
+
+    ```TypeScript
+    interface Course {
+      title: string;
+    }
+    const createCourse = (title: string) => {
+      let courseGoal: Partial<Course> = {};
+      courseGoal.title = title;
+      return courseGoal;
+    }
+    ```
+
+  - Readonly Type: cannot manipulate variable, obj, array after creation
+
+    ```TypeScript
+    const names2: Readonly<string[]> = ['Matchu', 'Mio'];
+    ```
+
+- Generic Types vs Union Types:
+  - Union types: defines f.e. in case of "(string | number | boolean)[]" that I'm free to use all these types for the items of array
+  - Generic Types: defines dynamically a type f.e. depending on inserted argument type, BUT then locks in this type for entire function or class (-> f.e. string is set internally)

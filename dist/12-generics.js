@@ -56,4 +56,4 @@ const createCourseGoal = (title, description, date) => {
     return courseGoal;
 };
 const names2 = ['Matchu', 'Mio'];
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=12-generics.js.map
