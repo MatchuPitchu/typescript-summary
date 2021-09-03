@@ -16,7 +16,7 @@ abstract class Department {
   // 2) constructor is a reserved key word in classes, it is a function tied to the class
   // this function is executed when object is created
   // 7) Shorthand Initialization: in order to not repeat, don't need "name: string" and "id: string" above
-  // and "this.name = name" and "this.id = id" in constructor, only need private or public and wished 
+  // and "this.name = name" and "this.id = id" in constructor, only need private, protected or public and wished 
   // variable names as parameters in constructor function
   // 8) "readonly" properties: only exists in TS; not allowed to change after initialization
   constructor(protected readonly id: string, public name: string) {

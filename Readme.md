@@ -125,6 +125,8 @@ TypeScript's type system only helps during development (i.e. before the code get
   const testBtn = document.getElementById('testBtn')!;
   ```
 
+- !! - ensures the resulting type is a boolean (true or false)
+
 # Classes and TypeScript - Summary of TS file
 
 > More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
@@ -364,3 +366,147 @@ TypeScript's type system only helps during development (i.e. before the code get
 - Generic Types vs Union Types:
   - Union types: defines f.e. in case of "(string | number | boolean)[]" that I'm free to use all these types for the items of array
   - Generic Types: defines dynamically a type f.e. depending on inserted argument type, BUT then locks in this type for entire function or class (-> f.e. string is set internally)
+
+# Decoractors
+
+> More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
+
+- a decorator is a special kind of declaration that can be attached to a class declaration, method, accessor, property or parameter
+- set "experimentalDecorators": true in tsconfig.json to be able to use decorators
+- decorator runs when class definition is found (NOT when class is instantiated)
+
+- Decorator function
+
+  - convention to start with uppercase starting letter
+  - decorator to a class has 1 parameter (-> constructor)
+  - to invoke decorator function add the identifier "@" and the function name (-> @Logger)
+
+    ```TypeScript
+    const Logger = (constructor: Function) => console.log(constructor);
+
+    @Logger
+    class Person {
+      // ...
+    }
+    ```
+
+- Decorator factories
+
+  - return decorator function, so I can invoke it with @Logger(argument) and pass this argument to the inner decorator function
+
+  ```TypeScript
+  const Logger = (log: string) => {
+    return function(constructor: Function) {
+      console.log('LogString: ', log);
+      console.log('Constructor: ', constructor);
+    }
+  }
+
+  @Logger('Hello')
+  class Person {
+    // ...
+  }
+  ```
+
+- Building More Useful Decorators with Templates: look at detailed example in decorators file
+
+  - hook into html element and insert own html, dynamic data etc.
+
+    ```TypeScript
+    const WithTemplate = (template: string, hookId: string) => {
+      // to tell TS that I don't need constructor here, add underscore as parameter (_)
+      return function(_: Function) {
+      const hookEl = document.getElementById(hookId);
+      if(hookEl) {
+        hookEl.innerHTML = template;
+      }
+    }
+
+    @WithTemplate('<h1>Hello</h1>', 'decoratorId')
+    class Person {
+      // ...
+    }
+    ```
+
+- Adding Multiple Decorators:
+
+  - execution of decorator functions is bottom up;
+  - BUT: regarding the decorator factories, so the normal invocation with @Logger etc., they run top down
+    ```TypeScript
+    @Logger
+    @WithTemplate('<h1>Hello</h1>', 'decoratorId')
+    class Person {
+      // ...
+    }
+    ```
+
+- Property decorators takes 2 arguments:
+
+  - target of the property (-> if called on an instance, then it's prototype of obj that was created; -> if static property, target refers to constructor function);
+  - property name
+    ```TypeScript
+    const Log = (target: any, propName: string | Symbol) => {
+      console.log('Property decorator: ', target, propName);
+    }
+    ```
+
+- Accessor (setters, getters) decorators takes 3 arguments:
+
+  - target of the property (look above)
+  - name of accessor
+  - descriptor with TS built-in type PropertyDescriptor
+    ```TypeScript
+    const Log2 = (target: any, name: string, descriptor: PropertyDescriptor) => {
+      console.log('Accessor decorator: ', target, name, descriptor)
+    }
+    ```
+
+- Method decorators takes 3 arguments: same as for accessor decorators
+
+  ```TypeScript
+  const Log3 = (target: any, name: string | Symbol, descriptor: PropertyDescriptor) => {
+    console.log('Method decorator: ', target, name, descriptor)
+  }
+  ```
+
+- parameter decorators takes 3 arguments
+
+  ```TypeScript
+  const Log4 = (target: any, name: string | Symbol, position: number) => {
+    console.log('Parameter decorator: ', target, name, position)
+  }
+  ```
+
+  ```TypeScript
+  class Product {
+    @Log
+    title: string;
+    private _price: number;
+
+    @Log2
+    set price(val: number) {
+      if(val > 0) this._price = val;
+        else throw new Error('Invalid price - should be positive')
+    }
+
+    constructor(t: string, p: number) {
+      this.title = t;
+      this._price = p;
+    }
+
+    @Log3
+    getPriceWithTax(@Log4 tax: number) {
+      return this._price * (1 + tax);
+    }
+  }
+  ```
+
+- Returning (and changing) a Class in a Class Decorator
+
+  - returning a new constructor function (with syntatic sugar "class extends constructor") which is based on the original constructor (-> I keep all properties of original class)
+
+- Other Decorator Return Types: return inside of Decorator functions (Attention: NOT decorator factories, they return always of course) is possible on accessor and method decorators; can return a new PropertyDescriptor
+
+- Data Validation with Decorators:
+  - look at example in file
+  - recommanded npm class-validator package is f.e. availabe here: https://www.npmjs.com/package/class-validator
