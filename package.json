@@ -1,13 +1,13 @@
 {
-  "name": "30.2_typescript-tutorial",
+  "name": "typescript_tutorial_academind",
   "version": "1.0.0",
-  "description": "- https://www.youtube.com/watch?v=BwuLxPH8IDs",
+  "description": "Understanding TypeScript Course Setup",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server"
   },
-  "author": "",
+  "author": "Michael Flohr",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.6.1"

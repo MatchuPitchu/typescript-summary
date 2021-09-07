@@ -185,6 +185,7 @@ const Require = (target: any, propName: string) => {
     // take any existing key value pairs thanks to spread operator; otherwise variale would be overwritten
     ...registeredValidators[target.constructor.name],
     // naive approach to show idea of validation; in real case I should check if propName already exists and so on
+    // the spread operator in array causes an error - don't have solution so far
     [propName]: [...registeredValidators[target.constructor.name][propName], 'required']
   }
   console.log(registeredValidators[target.constructor.name]);
