@@ -12,46 +12,49 @@
 
 # Useful Commands for CLI and Compiling
 
-- to automate reloading live server site when I change + compile file:
-  - type in => CLI "npm init" (to be able to install usefull third party packages)
+- automate reloading live server site when I change + compile file:
+  - type "npm init" in CLI (to be able to install usefull third party packages)
   - npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon")
-  - add in package.json in "scripts": { "start": "lite-server" }
-- Compile 1 file with Command: to compile a file, use "tsc app.ts" in the CLI; than in case all compiling errors are shown in the console
-- Watch 1 file to Compile after every saved change: use watch node to let compile a file always when file is changed: "tsc app.ts --watch" or "tsc app.ts -w"
-- Compile entire project: first "tsc --init" to initialize a TS managed project; creates tsconfig.json file; than type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
-- tsconfig.json: can exclude files from being compiled or include files (than have to list all(!) files or folders that should be compiled), after "compilerOptions": { }; when add "exclude" and "include" than compilation is included files/folders minus excluded files/-folders
+  - add "scripts": { "start": "lite-server" } to package.json
+- compile 1 file: use "tsc app.ts" in CLI; then in case all compiling errors are shown in the console
+- watch 1 file AND compile it after every saved change: use watch mode "tsc app.ts --watch" or "tsc app.ts -w"
+- compile entire project: first "tsc --init" to initialize a TS managed project; creates tsconfig.json; then type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
+- tsconfig.json: can exclude files from being compiled or include files
 
-```JSON
-  "compilerOptions": {
-    "sourceMap": true, // app.js.map files are created while compilation; so in browser in source area I can see ts code for better debugging
-    "outDir": "./dist", // output of compiled ts files (so js files) is found in this folder; also folder structure is replicated automatically
-    "rootDir": "./src", // TS only checks this folder to compile files and would replicate this folder structure (with all subfolders) --> without defining this, TS compiles every ts file found in project and replicates all found structure in outDir folder
-    "removeComments": true, // to make output js files smaller
-    "noEmitOnError": false, // default is false; so TS creates js files even if there is an error; if set to true, than no file is emitted if any file fails to compile
+  - include files: then have to list after `"compilerOptions": { }` all(!) files or folders that should be compiled;
+  - exclude + include files: when add both then `compilation = included files/folders - excluded files/-folders`
 
-  }
-  "exclude": [
-    "node_modules", // if I exclude no other files, than "node_modules" is by default excluded; when I add other exclusions, than I have to list "node_modules" to exclude all files inside node_modules folder
-    "a-using-ts.ts",
-    "*.ts", // * equal wildcard, now all files with ending .ts are excluded
-    "**/*.ts" // * now every file with ending .ts in every order is excluded
-  ],
-  "include": [
-    "app.ts", // file name
-    "components" // folder
-  ]
-```
+  ```JSON
+    "compilerOptions": {
+      "sourceMap": true, // app.js.map files are created while compilation; so in browser in source area I can see ts code for better debugging
+      "outDir": "./dist", // output of compiled ts files (so js files) is found in this folder; also folder structure is replicated automatically
+      "rootDir": "./src", // TS only checks this folder to compile files and would replicate this folder structure (with all subfolders) --> without defining this, TS compiles every ts file found in project and replicates all found structure in outDir folder
+      "removeComments": true, // to make output js files smaller
+      "noEmitOnError": false, // default is false; so TS creates js files even if there is an error; if set to true, then no file is emitted if any file fails to compile
+
+    }
+    "exclude": [
+      "node_modules", // if I exclude no other files, then "node_modules" is by default excluded; when I add other exclusions, then I have to list "node_modules" to exclude all files inside node_modules folder
+      "a-using-ts.ts",
+      "*.ts", // * equal wildcard, now all files with ending .ts are excluded
+      "**/*.ts" // * now every file with ending .ts in every order is excluded
+    ],
+    "include": [
+      "app.ts", // file name
+      "components" // folder
+    ]
+  ```
 
 # Primitive Types and Reference Types
 
 - Primitives: const, let, var, strings, booleans, undefined, null
 - Reference Types: objects, arrays
-- What is the difference:
+- Difference:
 
   - related to memory management: JS knows two types of memory: Stack and Heap
   - stack: easy-to-access memory that simply manages its items as a stack. Only items for which the size is known in advance can go onto the stack. This is the case for numbers, strings, booleans.
   - heap: memory for items of which you can’t pre-determine the exact size and structure. Since objects and arrays can be mutated and change at runtime, they have to go into the heap therefore.
-  - For each heap item, the exact address is stored in a pointer which points at the item in the heap. This pointer in turn is stored on the stack.
+  - for each heap item, the exact address is stored in a pointer which points at the item in the heap. This pointer in turn is stored on the stack.
 
   ```JavaScript
   let person = { name: 'Matchu' }
@@ -64,7 +67,7 @@
 
 # Core Types in TypeScript
 
-TypeScript's type system only helps during development (i.e. before the code gets compiled)
+TypeScript's type system only helps during development (e.g. before code gets compiled)
 
 - number: no differentiation btw integers, floats ...: 1, 5.3, -10 is possible
 - string: 'T', "T", `T`
@@ -95,8 +98,23 @@ TypeScript's type system only helps during development (i.e. before the code get
   ```
 
 - union types: defining more than one data type for a variable or a function parameter
+
+  ```TypeScript
+  input: number | string;
+  ```
+
 - literal types: There are three sets of literal types available in TS: strings, numbers, and booleans; by using literal types you can allow an exact value which a string, number, or boolean must have
-- Type Alias: can store types like union or literal type(s) in a custom named type that I can use everywhere in my code; Type aliases are sometimes similar to interfaces, but can name primitives, unions, tuples, and any other types that you'd otherwise have to write by hand. ... Aliasing doesn't actually create a new type - it creates a new name to refer to that type.
+
+  ```TypeScript
+  resultConversation: 'as-number' | 'as-text';
+  ```
+
+- type alias: can store types like union or literal type(s) in a custom named type that I can use everywhere in my code; Type aliases are sometimes similar to interfaces, but can name primitives, unions, tuples, and any other types that you'd otherwise have to write by hand. Aliasing doesn't actually create a new type - it creates a new name to refer to that type.
+
+  ```TypeScript
+  type Combinable = number | string;
+  let input: Combinable = 5;
+  ```
 
 - Function Return Types: define the return type of a function; example:
 
@@ -126,6 +144,10 @@ TypeScript's type system only helps during development (i.e. before the code get
   ```
 
 - !! - ensures the resulting type is a boolean (true or false)
+
+  ```TypeScript
+  isValid = isValid && !!obj[prop];
+  ```
 
 # Classes and TypeScript - Summary of TS file
 
