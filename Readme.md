@@ -24,7 +24,7 @@
   - include files: then have to list after `"compilerOptions": { }` all(!) files or folders that should be compiled;
   - exclude + include files: when add both then `compilation = included files/folders - excluded files/-folders`
 
-  ```JSON
+  ```JavaScript
     "compilerOptions": {
       "sourceMap": true, // app.js.map files are created while compilation; so in browser in source area I can see ts code for better debugging
       "outDir": "./dist", // output of compiled ts files (so js files) is found in this folder; also folder structure is replicated automatically
