@@ -13,9 +13,9 @@
 # Useful Commands for CLI and Compiling
 
 - to automate reloading live server site when I change + compile file:
-  1. type in => CLI "npm init" (to be able to install usefull third party packages)
-  1. npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon")
-  1. add in package.json in "scripts": { "start": "lite-server" }
+  - type in => CLI "npm init" (to be able to install usefull third party packages)
+  - npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon")
+  - add in package.json in "scripts": { "start": "lite-server" }
 - Compile 1 file with Command: to compile a file, use "tsc app.ts" in the CLI; than in case all compiling errors are shown in the console
 - Watch 1 file to Compile after every saved change: use watch node to let compile a file always when file is changed: "tsc app.ts --watch" or "tsc app.ts -w"
 - Compile entire project: first "tsc --init" to initialize a TS managed project; creates tsconfig.json file; than type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
