@@ -14,34 +14,33 @@
 
 - automate reloading live server site when I change + compile file:
   - type "npm init" in CLI (to be able to install usefull third party packages)
-  - npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon")
+  - npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon": lite-server refreshes browser when changes are detected, nodemon restarts Node.js app when file changes in a directory are detected)
   - add "scripts": { "start": "lite-server" } to package.json
-- compile 1 file: use "tsc app.ts" in CLI; then in case all compiling errors are shown in the console
+- compile 1 file: use "tsc app.ts" in CLI; then all compiling errors are shown in console
 - watch 1 file AND compile it after every saved change: use watch mode "tsc app.ts --watch" or "tsc app.ts -w"
-- compile entire project: first "tsc --init" to initialize a TS managed project; creates tsconfig.json; then type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
+- compile entire project: first "tsc --init" to initialize TS managed project; creates tsconfig.json; then type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
 - tsconfig.json: can exclude files from being compiled or include files
 
-  - include files: then have to list after `"compilerOptions": { }` all(!) files or folders that should be compiled;
-  - exclude + include files: when add both then `compilation = included files/folders - excluded files/-folders`
+  - include files: after `"compilerOptions": { }` have to list all(!) files or folders that should be compiled;
+  - include + exclude files: when add both then `compilation = included files/folders - excluded files/-folders`
 
   ```JavaScript
     "compilerOptions": {
-      "sourceMap": true, // app.js.map files are created while compilation; so in browser in source area I can see ts code for better debugging
-      "outDir": "./dist", // output of compiled ts files (so js files) is found in this folder; also folder structure is replicated automatically
-      "rootDir": "./src", // TS only checks this folder to compile files and would replicate this folder structure (with all subfolders) --> without defining this, TS compiles every ts file found in project and replicates all found structure in outDir folder
-      "removeComments": true, // to make output js files smaller
-      "noEmitOnError": false, // default is false; so TS creates js files even if there is an error; if set to true, then no file is emitted if any file fails to compile
-
-    }
-    "exclude": [
-      "node_modules", // if I exclude no other files, then "node_modules" is by default excluded; when I add other exclusions, then I have to list "node_modules" to exclude all files inside node_modules folder
-      "a-using-ts.ts",
-      "*.ts", // * equal wildcard, now all files with ending .ts are excluded
-      "**/*.ts" // * now every file with ending .ts in every order is excluded
-    ],
+      "sourceMap": true, // app.js.map files are created while compilation; so in browser in source area I can see TS code for better debugging
+      "outDir": "./dist", // output of compiled TS files (so JS files) is found in this folder; also folder structure is replicated automatically
+      "rootDir": "./src", // TS only checks this folder to compile files and would replicate this folder structure (with all subfolders) --> without defining this, TS compiles every TS file found in project and replicates all found structure in outDir folder
+      "removeComments": true, // to make output JS files smaller
+      "noEmitOnError": false, // default is false; so TS creates JS files even if there is an error; if set to true, then no file is emitted if any file fails to compile
+    },
     "include": [
       "app.ts", // file name
       "components" // folder
+    ],
+    "exclude": [
+      "node_modules", // if I exclude no other files, then "node_modules" is by default excluded; when I add other exclusions, then I have to list "node_modules" to exclude all files inside node_modules folder
+      "a-using-ts.ts",
+      "*.ts", // * equal wildcard, all files with ending .ts are excluded
+      "**/*.ts" // * every file with ending .ts in every order is excluded
     ]
   ```
 
@@ -51,45 +50,58 @@
 - Reference Types: objects, arrays
 - Difference:
 
-  - related to memory management: JS knows two types of memory: Stack and Heap
-  - stack: easy-to-access memory that simply manages its items as a stack. Only items for which the size is known in advance can go onto the stack. This is the case for numbers, strings, booleans.
-  - heap: memory for items of which you can’t pre-determine the exact size and structure. Since objects and arrays can be mutated and change at runtime, they have to go into the heap therefore.
+  - related to memory management: JS knows two types of memory - Stack and Heap
+  - stack: easy-to-access memory that simply manages its items as a stack. Only items for which the size is known in advance can go onto the stack (-> Primitives)
+  - heap: memory for items of which you can't pre-determine exact size and structure. Since objects and arrays can be mutated and change at runtime, they have to go into heap
   - for each heap item, the exact address is stored in a pointer which points at the item in the heap. This pointer in turn is stored on the stack.
 
-  ```JavaScript
-  let person = { name: 'Matchu' }
-  let newPerson = person
-  newPerson.name = 'Pitchu'
-  // This prints 'Pitchu' because I never copied person obj itself to newPerson
-  // only copied the pointer; it points still at the same address in memory
-  console.log(person.name)
-  ```
+```JavaScript
+let person = { name: 'Matchu' }
+let newPerson = person
+newPerson.name = 'Pitchu'
+// This prints 'Pitchu' because I never copied person obj itself to newPerson
+// only copied the pointer; it points still at the same address in memory;
+// real copy would be e.g. let newPerson = {...person};
+console.log(person.name);
+```
 
 # Core Types in TypeScript
 
-TypeScript's type system only helps during development (e.g. before code gets compiled)
+type system only helps during development (e.g. before code gets compiled)
 
 - number: no differentiation btw integers, floats ...: 1, 5.3, -10 is possible
 - string: 'T', "T", `T`
-- boolean: true, false (attention: no "truthy" or "falsy" values)
+- boolean: true, false (attention: NO "truthy" or "falsy" values)
 - object: { age: 30 }
-- array: [1, 2, 3]
-- Tuple: [1, 2] - fixed-length array; definition would be i.e. role: [number, string]
-- Enum: enum { NEW, OLD } - only exists in TS, not in JS; automatically enumerated global constant identifiers; so when I need identifiers that are human readable
+- array: []
+- Tuple: [1, 2] - fixed-length array; definition would be e.g. role: [number, string]
+- Enum: enum { ADMIN, USER } - only exists in TS, not in JS; automatically enumerated global constant identifiers; so when I need identifiers that are human readable
 
   ```TypeScript
   enum Role { ADMIN, READ_ONLY, AUTHOR };
   ```
 
 - any: \* - any kind of value, no specific type assignment; avoid it because it gives away all advantages of TS
-- unknown: is the type-safe counterpart of any. Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing (siehe example in coding file)
-- void: void can be declared as the return type of a function, that means that function has no return statement; example:
+- unknown: is the type-safe counterpart of any. Anything is assignable to unknown, but unknown isn't assignable to anything but itself and any without a type assertion or a control flow based narrowing (look at example in file)
 
   ```TypeScript
-  function add(num: number): void { console.log(num)};
+  let userInput: unknown;
+  let userName: string
+
+  userInput = 5;
+  userInput = 'Matchu';
+  // userName = userInput -> TS ERROR! because it is not sure that userInput is string;
+  // first: check typeof to be able to assign unknown variable to varibale with fixed type
+  if(typeof userInput === 'string') userName = userInput;
   ```
 
-- never Type: indicates the values that will never occur. The never type is used when you are sure that something is never going to occur. For example, you write a function which will not return to its end point or always throws an exception. example:
+- void: void can be declared as the return type of a function, i.e. function has NO return statement
+
+  ```TypeScript
+  function add(num: number): void { console.log(num) };
+  ```
+
+- never: indicates values that will never occur; never type is used when you are sure that smth is never going to occur; e.g. function which will not return to its end point or always throws an exception
 
   ```TypeScript
   const generateError = (message: string, code: number): never => {
@@ -103,32 +115,34 @@ TypeScript's type system only helps during development (e.g. before code gets co
   input: number | string;
   ```
 
-- literal types: There are three sets of literal types available in TS: strings, numbers, and booleans; by using literal types you can allow an exact value which a string, number, or boolean must have
+- literal types: 3 sets of literal types available in TS: strings, numbers, and booleans; by using literal types you can allow an exact value which a string, number, or boolean must have
 
   ```TypeScript
   resultConversation: 'as-number' | 'as-text';
   ```
 
-- type alias: can store types like union or literal type(s) in a custom named type that I can use everywhere in my code; Type aliases are sometimes similar to interfaces, but can name primitives, unions, tuples, and any other types that you'd otherwise have to write by hand. Aliasing doesn't actually create a new type - it creates a new name to refer to that type.
+- type alias: store types (like union or literal type) in custom named type that I can use everywhere in my code; type aliases are sometimes similar to interfaces, but can name primitives, unions, tuples, and any other types that you'd otherwise have to write by hand. Aliasing NOT creates a new type, but creates new name to refer to type(s).
 
   ```TypeScript
   type Combinable = number | string;
   let input: Combinable = 5;
   ```
 
-- Function Return Types: define the return type of a function; example:
+- Function Return Types: define return type of a function
 
   ```TypeScript
-  function add(num: number): number { }
+  function add(): number {}
+  // OR
+  const add2 = (): number => {}
   ```
 
-- Function Types: define type(s) of parameters of function and type of return of function; so only function which fulfills types can be stored in a variable; example: ,
+- Function Types: define type(s) of parameters of function and type of return of function; so only a function which fulfills types can be stored in a variable
 
   ```TypeScript
   let combineValues: (a: number, b: number) => number
   ```
 
-- Function Types and Callbacks: define in parameters of a function the type of a callback function; example:
+- Function Types and Callbacks: define in parameters of function the type of cb function
 
   ```TypeScript
   const addAndHandle = (n1: number, n2: number, cb: (num: number) => void) => {
@@ -137,36 +151,57 @@ TypeScript's type system only helps during development (e.g. before code gets co
   }
   ```
 
-- ! - exclamation mark tells TS that 'testBtn' exists and so that variable `const testBtn` is never null
+- ! - exclamation mark tells TS that 'testBtn' exists, i.e. that `const testBtn` is never null
 
   ```TypeScript
   const testBtn = document.getElementById('testBtn')!;
   ```
 
-- !! - ensures the resulting type is a boolean (true or false)
+- !! - ensures that resulting type is a boolean (true or false)
 
   ```TypeScript
+  let isValid = true;
   isValid = isValid && !!obj[prop];
   ```
 
 # Classes and TypeScript - Summary of TS file
 
-> More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+> More on JS Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 
 - define properties, methods and constructor
-- "this" keyword to refer to the object itself
+- `this` keyword to refer to the object itself
 - creation of new instance of a class (-> a new obj based on a class)
-- "private", "protected" and "public" (is the default) Access Modifiers: mark properties and methods with these keywords
-  - "private": means that is only accessible from inside the class / from inside the created object
-  - "protected": means like "private" + also in any class that "extends" this class
-  - "public": I can access it from outside and manipulate it
-- Shorthand Initialization: in order to not repeat, don't need property creation (f.e. "name: string", "id: string") AND "this.name = name", "this.id = id" in constructor function; only need private or public and wished variable names as parameters in constructor function
-- "readonly" properties: not allowed to change after initialization
-- inheritance: inherit main class to another subtype class using "extends" keyword;
+  - `private`, `protected` and `public` (is the default) Access Modifiers: can mark properties and methods with these keywords
+  - `private`: it's only accessible from inside the class / the created object
+  - `protected`: like "private" + regards any class that "extends" this class
+  - `public`: can be accessed and manipulated from outside
+- Shorthand Initialization: in order to not repeat, don't need property creation (e.g. `name: string`) AND assignment in constructor (e.g. `this.name = name`); only need private or public and wished variable names as parameters in constructor
+
+  ```TypeScript
+    class Long {
+      name: string;
+      constructor(name: string) {
+        this.name = id;
+      }
+    }
+    class Short {
+      constructor(public name: string) {}
+    }
+  ```
+
+- `readonly` properties: not allowed to change after initialization
+- inheritance: inherit main class to another subtype class using `extends` keyword;
+  ```TypeScript
+  class SecondClass extends BaseClass {
+    //...
+  }
+  ```
 - overriding properties and methods of base class: possible in every subtype class with new declaration of properties or methods
 - getters & setters
-- static properties & methods with "static" keyword: allows you to add properties & methods to classes which are not accessed on an instance of the class, so I don't need to call first new ClassName and save this in a constant; I access static methods & properties directly on the class; Example: Math constructor function or globally available function
-- abstract classes: usefull if I want to enforce that all classes based on one class share some common methods and properties;
+- static properties & methods with `static` keyword: allows you to add properties & methods to classes which are not accessed on an instance of the class, so I don't need to call first `new ClassName` and save this in a `const`; I access static methods & properties directly on the class; Example: Math constructor function (-> e.g. `Math.random()`) or globally available function
+- `abstract`:
+  - in front of class: force all classes based on one class to share some common methods and properties; with `abstract` I cannot instantiate this base class
+  - in front of method fn inside class: force all classes based on that class to add and overwrite this method
 - singletons & private constructors: to make sure that I can only create one obj based on this class
 
 # Interfaces - Summary of TS file
@@ -185,7 +220,7 @@ TypeScript's type system only helps during development (e.g. before code gets co
 - using interfaces with classes: to share the structure of functionalities among different classes -> to enforce that the property and function structure is at least inside a certain class, but of course more can also be added in the respective class;
 
   ```TypeScript
-  class ClassName implements FirstInterface, AnotherInterface {
+  class ClassName implements FirstInterface, AnotherInterface {}
   ```
 
 - extending interfaces: combine interfaces with "extends" like for classes; extend with more than one interface with comma separation

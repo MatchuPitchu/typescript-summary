@@ -4,9 +4,8 @@ let userName: string
 
 userInput = 5;
 userInput = 'Matchu';
-// userName = userInput; !TS ERROR! because it is not sure that userInput is a string
-// so in this case I have to check first typeof in order to be able to assign 
-// a unknown variable to a varibale with a fixed type
+  // userName = userInput -> TS ERROR! because it is not sure that userInput is string;
+  // first: check typeof to be able to assign unknown variable to varibale with fixed type
 if(typeof userInput === 'string') {
   userName = userInput;
 }
