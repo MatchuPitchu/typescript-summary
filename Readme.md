@@ -302,7 +302,7 @@ type system only helps during development (e.g. before code gets compiled)
   }
   ```
 
-- Discriminated Unions: is a pattern that makes implementing type guards easier; define a property of a literal type (f.e. type: 'bird') that describes/determines exactly this object
+- Discriminated Unions: is a pattern that makes implementing type guards easier; define a property of a literal type (e.g. type: 'bird') that determines exactly this object
 
   ```TypeScript
   interface Bird {
@@ -311,21 +311,21 @@ type system only helps during development (e.g. before code gets compiled)
   }
   ```
 
-- Type Casting: helps to tell TS that some value is of a specific type where TS is not able to detect it on his own, but I as a dev know it; use case: selecting DOM element because TS doesn't analyse html document -> so only knows often that's an HTMLElement, but not which exact type (f.e. an HTMLInputElement)
+- Type Casting: helps to tell TS that some value is of a specific type where TS is not able to detect it on his own, but I as a dev know it; use case: selecting DOM element because TS doesn't analyse html document -> so often TS only knows that's an HTMLElement, but not which exact type (e.g. HTMLInputElement)
 
-  - with "<" + ElementName + ">"
+  - with `<ElementTypeName>`
 
   ```TypeScript
   const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
   ```
 
-  - for React: "as" keyword to avoid clash to similar JSX syntax in React
+  - for React: "as" keyword to avoid clash with similar JSX syntax
 
   ```TypeScript
   const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
   ```
 
-- Index Types with `[key: typeName]`: to have flexibility that I don't need to know in advance which property names I wanna use AND how many I will need;
+- Index Types with `[key: typeName]`: to have flexibility; I don't need to know in advance which property names I wanna use AND how many I will need;
 
   ```TypeScript
   interface ErrorContainer {
@@ -333,7 +333,7 @@ type system only helps during development (e.g. before code gets compiled)
   }
   ```
 
-- Function Overloads: to tell TS what's the exact return if arguments are of this or this type; only works with function declaration, not function expression
+- Function Overloads: to tell TS what's exact return if arguments of certain type(s); only works with function declaration, not function expression
 
   ```TypeScript
   function add7(a: number, b: number): number;
@@ -344,13 +344,13 @@ type system only helps during development (e.g. before code gets compiled)
   }
   ```
 
-- Optional Chaining: use question mark (?), that means if data exists access next property; if data in front of ? is undefined, then it will not access the property after AND not throw a runtime error
+- Optional Chaining: use question mark (?), that means if data exists access next property; if data in front of ? is undefined, then not access next property AND not throw runtime error
 
   ```TypeScript
   console.log(fetchedUserData?.job?.title)
   ```
 
-- Nullish Coalescing Operator "??": if value before is null OR undefined (Attention: NOT empty string, NOT zero), then fallback after is used
+- Nullish Coalescing Operator "??": if value before is null OR undefined (Attention: NOT empty string or zero), then use fallback
 
   ```TypeScript
   const storedData = userInput2 ?? 'DEFAULT';
@@ -363,14 +363,14 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Built-in Generics are main types (like Array, Object, Promise ...) that allow a variety of data types rather than a single data type; generic type parameter is specified in angle brackets `const names: Array<string> = ['Matchu']`
 
-- Generic Functions: thanks to generic definition TS infers dynamically the types of the arguments used in the function AND TS knows that return of function is the intersection of T & U;
+- Generic Functions: thanks to generic definition TS infers dynamically the types of arguments used in a function AND TS knows that return of function is the intersection of T & U;
 
-  - T, U and so on in alphabetical order is a convention
+  - T, U and so on naming in alphabetical order is a convention
   - Working with Constraints: keyword "extends" restricts the dynamically set types of T and U to be objects
     ```TypeScript
     const merge = <T extends object, U extends object>(objA: T, objB: U) => Object.assign(objA, objB);
     ```
-  - use an interface to indicate TS that every element based on it has a certain property; can also precise the return of this function
+  - use interface to indicate TS that every element based on it has a certain property; can also precise the return of this function (-> here Tuple)
     ```TypeScript
     interface Lenghty {
       length: number
@@ -386,7 +386,7 @@ type system only helps during development (e.g. before code gets compiled)
     }
     ```
 
-- Generic Classes: use generic type T and use it for property "data" that this will be and Array (-> T[])
+- Generic Classes: use generic type T and use it for property "data" that this will be Array (-> T[])
 
   ```TypeScript
   class DataStorage<T extends string | number | boolean> {
@@ -401,7 +401,7 @@ type system only helps during development (e.g. before code gets compiled)
 
   > handy built-in utility types: https://www.typescriptlang.org/docs/handbook/utility-types.html
 
-  - Partial Type: wraps my own created type / interface and sets all properties as optional
+  - Partial Type: wraps my own created type/interface and sets all properties as optional
 
     ```TypeScript
     interface Course {
@@ -421,15 +421,15 @@ type system only helps during development (e.g. before code gets compiled)
     ```
 
 - Generic Types vs Union Types:
-  - Union types: defines f.e. in case of "(string | number | boolean)[]" that I'm free to use all these types for the items of array
-  - Generic Types: defines dynamically a type f.e. depending on inserted argument type, BUT then locks in this type for entire function or class (-> f.e. string is set internally)
+  - Union types: defines e.g. in case of "(string | number | boolean)[]" that I'm free to use all these types for the items of array
+  - Generic Types: defines dynamically a type e.g. depending on inserted argument type, BUT then locks in this type for entire function or class (-> e.g. string is set internally)
 
 # Decoractors
 
 > More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
 
 - a decorator is a special kind of declaration that can be attached to a class declaration, method, accessor, property or parameter
-- set "experimentalDecorators": true in tsconfig.json to be able to use decorators
+- in tsconfig.json set `"experimentalDecorators": true` to be able to use decorators
 - decorator runs when class definition is found (NOT when class is instantiated)
 
 - Decorator function
@@ -449,7 +449,7 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Decorator factories
 
-  - return decorator function, so I can invoke it with @Logger(argument) and pass this argument to the inner decorator function
+  - return decorator function, so I can invoke it with @Logger(argument) and pass argument to inner decorator fn
 
   ```TypeScript
   const Logger = (log: string) => {
@@ -473,9 +473,10 @@ type system only helps during development (e.g. before code gets compiled)
     const WithTemplate = (template: string, hookId: string) => {
       // to tell TS that I don't need constructor here, add underscore as parameter (_)
       return function(_: Function) {
-      const hookEl = document.getElementById(hookId);
-      if(hookEl) {
-        hookEl.innerHTML = template;
+        const hookEl = document.getElementById(hookId);
+        if(hookEl) {
+          hookEl.innerHTML = template;
+        }
       }
     }
 
@@ -499,7 +500,7 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Property decorators takes 2 arguments:
 
-  - target of the property (-> if called on an instance, then it's prototype of obj that was created; -> if static property, target refers to constructor function);
+  - target of the property (a. if called on an instance, then it's prototype of created obj; b. if static property, target refers to constructor fn);
   - property name
     ```TypeScript
     const Log = (target: any, propName: string | Symbol) => {
@@ -560,10 +561,10 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Returning (and changing) a Class in a Class Decorator
 
-  - returning a new constructor function (with syntatic sugar "class extends constructor") which is based on the original constructor (-> I keep all properties of original class)
+  - returning a new constructor function (with syntatic sugar `class extends constructor`) which is based on original constructor (-> I keep all properties of original class)
 
 - Other Decorator Return Types: return inside of Decorator functions (Attention: NOT decorator factories, they return always of course) is possible on accessor and method decorators; can return a new PropertyDescriptor
 
 - Data Validation with Decorators:
   - look at example in file
-  - recommanded npm class-validator package is f.e. availabe here: https://www.npmjs.com/package/class-validator
+  - recommanded npm class-validator package is e.g. availabe here: https://www.npmjs.com/package/class-validator
