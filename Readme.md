@@ -168,7 +168,31 @@ type system only helps during development (e.g. before code gets compiled)
 
 > More on JS Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 
-- define properties, methods and constructor
+- define properties (-> are like "variables attached to classes/obj"), methods (-> are like "functions attached to classes/obj"), constructor
+
+  ```TypeScript
+  class Person {
+    // properties ES6
+    constructor() {
+      this.name = 'Matchu';
+    }
+
+    // functions ES6
+    myMethod() {
+      // ...
+    }
+  }
+  class Person {
+    // properties ES7 (constructor NOT needed if no argument will be passed)
+    name = 'Matchu';
+
+    // functions ES7 (declared like props)
+    myMethod = () => {
+      // ...
+    }
+  }
+  ```
+
 - `this` keyword to refer to the object itself
 - creation of new instance of a class (-> a new obj based on a class)
   - `private`, `protected` and `public` (is the default) Access Modifiers: can mark properties and methods with these keywords
