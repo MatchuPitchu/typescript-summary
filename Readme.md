@@ -392,6 +392,7 @@ type system only helps during development (e.g. before code gets compiled)
   - `updatedArray[0].split('')` would cause runtime error, BUT no TS warning
   - solution: make a generic fn -> use `<>` and define inside generic type that is only available inside of this fn
   - `<T>` means that I can use T to define parameter types -> `array: T[], value: T` means that array will be full of T's and passed value will be of same type (-> also T)
+  - you can use `<>` to define a generic type, BUT also to specify a generic type parameter and explicitly set the placeholder type that should be used; sometimes required if TS is not able to infer (correct) type
 
     ```TypeScript
     const insertAtBeginning = <T>(array: T[], value: T) => {
@@ -402,8 +403,11 @@ type system only helps during development (e.g. before code gets compiled)
     const demoArray = [1, 2];
     const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2]
     // updatedArray[0].split(''); // TS error
-    const stringArray = insertAtBeginning(['a', 'b'], 'd'); // ['a', 'b', 'c']
+    const stringArray1 = insertAtBeginning(['a', 'b'], 'd'); // ['a', 'b', 'c']
     stringArray[0].split(''); // no error
+
+    // set concrete type for placeholder T explicitly:
+    const stringArray2 = insertAtBeginning<string>(['a', 'b', 'c'], 'd');
     ```
 
 - Built-in Generics are main types (like Array, Object, Promise ...) that allow a variety of data types rather than a single data type; generic type parameter is specified in angle brackets `const names: Array<string> = ['Matchu']`
