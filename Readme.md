@@ -65,6 +65,16 @@ newPerson.name = 'Pitchu'
 console.log(person.name);
 ```
 
+# Type inference
+
+- by default TS tries to infer as many types as possible
+- when you declare a variable directly, you don't need to write the type explicitly
+  ```TypeScript
+    // let course: string = 'React'; // not needed explicitly
+    let course = 'React';
+    // course = 12345; // Error
+  ```
+
 # Core Types in TypeScript
 
 type system only helps during development (e.g. before code gets compiled)
