@@ -385,6 +385,27 @@ type system only helps during development (e.g. before code gets compiled)
 - gives flexibility: regarding the values I pass in a function or I use in a class
 - combined with type safety: I get full type support what I do with the class or the result of a generic function
 
+- Basic Example
+
+  - `array: number[]` would only allow numbers, BUT fn could also work with strings etc.
+  - `array: any[]` is too unspecific because it allows everything and deactivates TS support
+  - `updatedArray[0].split('')` would cause runtime error, BUT no TS warning
+  - solution: make a generic fn -> use `<>` and define inside generic type that is only available inside of this fn
+  - `<T>` means that I can use T to define parameter types -> `array: T[], value: T` means that array will be full of T's and passed value will be of same type (-> also T)
+
+    ```TypeScript
+    const insertAtBeginning = <T>(array: T[], value: T) => {
+      const newArray = [value, ...array];
+      return newArray;
+    };
+
+    const demoArray = [1, 2];
+    const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2]
+    // updatedArray[0].split(''); // TS error
+    const stringArray = insertAtBeginning(['a', 'b'], 'd'); // ['a', 'b', 'c']
+    stringArray[0].split(''); // no error
+    ```
+
 - Built-in Generics are main types (like Array, Object, Promise ...) that allow a variety of data types rather than a single data type; generic type parameter is specified in angle brackets `const names: Array<string> = ['Matchu']`
 
 - Generic Functions: thanks to generic definition TS infers dynamically the types of arguments used in a function AND TS knows that return of function is the intersection of T & U;
