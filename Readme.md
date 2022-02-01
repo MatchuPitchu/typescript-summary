@@ -1,24 +1,21 @@
 # Video Tutorial
 
-> https://www.youtube.com/watch?v=BwuLxPH8IDs
+> <https://www.youtube.com/watch?v=BwuLxPH8IDs> > <https://pro.academind.com/courses/enrolled/762406>
 
-> https://pro.academind.com/courses/enrolled/762406
+## Official TypeScript Website
 
-# Official TypeScript Website
+> <https://www.typescriptlang.org/>
+> Basic Types: <https://www.typescriptlang.org/docs/handbook/2/everyday-types.html>
 
-> https://www.typescriptlang.org/
-
-> Basic Types: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
-
-# Useful Commands for CLI and Compiling
+## Useful Commands for CLI and Compiling
 
 - automate reloading live server site when I change + compile file:
-  - type "npm init" in CLI (to be able to install usefull third party packages)
-  - npm i --save-dev lite-server ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon": lite-server refreshes browser when changes are detected, nodemon restarts Node.js app when file changes in a directory are detected)
+  - type `npm init` in CLI (to be able to install usefull third party packages)
+  - `npm i --save-dev lite-server` ("--save-dev" to mark it at a development only tool - in package.json writen under devDependencies -, that helps during dev phase; lite-server is smth like "nodemon": lite-server refreshes browser when changes are detected, nodemon restarts Node.js app when file changes in a directory are detected)
   - add "scripts": { "start": "lite-server" } to package.json
-- compile 1 file: use "tsc app.ts" in CLI; then all compiling errors are shown in console
-- watch 1 file AND compile it after every saved change: use watch mode "tsc app.ts --watch" or "tsc app.ts -w"
-- compile entire project: first "tsc --init" to initialize TS managed project; creates tsconfig.json; then type only "tsc" or "tsc -w" in CLI to compile every ts file or to watch all changes
+- compile 1 file: use `tsc app.ts` in CLI; then all compiling errors are shown in console
+- watch 1 file AND compile it after every saved change: use watch mode `tsc app.ts --watch` or `tsc app.ts -w`
+- compile entire project: first `tsc --init` to initialize TS managed project; creates tsconfig.json; then type only `tsc` or `tsc -w` in CLI to compile every ts file or to watch all changes
 - tsconfig.json: can exclude files from being compiled or include files
 
   - include files: after `"compilerOptions": { }` have to list all(!) files or folders that should be compiled;
@@ -44,7 +41,7 @@
     ]
   ```
 
-# Primitive Types and Reference Types
+## Primitive Types and Reference Types
 
 - Primitives: const, let, var, strings, booleans, undefined, null
 - Reference Types: objects, arrays
@@ -65,17 +62,18 @@ newPerson.name = 'Pitchu'
 console.log(person.name);
 ```
 
-# Type inference
+## Type inference
 
 - by default TS tries to infer as many types as possible
 - when you declare a variable directly, you don't need to write the type explicitly
+
   ```TypeScript
     // let course: string = 'React'; // not needed explicitly
     let course = 'React';
     // course = 12345; // Error
   ```
 
-# Core Types in TypeScript
+## Core Types in TypeScript
 
 type system only helps during development (e.g. before code gets compiled)
 
@@ -174,9 +172,9 @@ type system only helps during development (e.g. before code gets compiled)
   isValid = isValid && !!obj[prop];
   ```
 
-# Classes and TypeScript - Summary of TS file
+## Classes and TypeScript - Summary of TS file
 
-> More on JS Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+> More on JS Classes: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes>
 
 - define properties (-> are like "variables attached to classes/obj"), methods (-> are like "functions attached to classes/obj"), constructor
 
@@ -225,11 +223,13 @@ type system only helps during development (e.g. before code gets compiled)
 
 - `readonly` properties: not allowed to change after initialization
 - inheritance: inherit main class to another subtype class using `extends` keyword;
+
   ```TypeScript
   class SecondClass extends BaseClass {
     //...
   }
   ```
+
 - overriding properties and methods of base class: possible in every subtype class with new declaration of properties or methods
 - getters & setters
 - static properties & methods with `static` keyword: allows you to add properties & methods to classes which are not accessed on an instance of the class, so I don't need to call first `new ClassName` and save this in a `const`; I access static methods & properties directly on the class; Example: Math constructor function (-> e.g. `Math.random()`) or globally available function
@@ -238,9 +238,9 @@ type system only helps during development (e.g. before code gets compiled)
   - in front of method fn inside class: force all classes based on that class to add and overwrite this method
 - singletons & private constructors: to make sure that I can only create one obj based on this class
 
-# Interfaces - Summary of TS file
+## Interfaces - Summary of TS file
 
-> More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
+> More on TS Interfaces: <https://www.typescriptlang.org/docs/handbook/interfaces.html>
 
 - interfaces describes how an object looks like (-> it's like a custom type to type check an obj later)
 
@@ -289,9 +289,9 @@ type system only helps during development (e.g. before code gets compiled)
   }
   ```
 
-# Advanced Types
+## Advanced Types
 
-> More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
+> More on Advanced Types: <https://www.typescriptlang.org/docs/handbook/advanced-types.html>
 
 - Intersection Types with "&" sign
 
@@ -390,7 +390,7 @@ type system only helps during development (e.g. before code gets compiled)
   const storedData = userInput2 ?? 'DEFAULT';
   ```
 
-# Generic Types
+## Generic Types
 
 - gives flexibility: regarding the values I pass in a function or I use in a class
 - combined with type safety: I get full type support what I do with the class or the result of a generic function
@@ -426,10 +426,13 @@ type system only helps during development (e.g. before code gets compiled)
 
   - T, U and so on naming in alphabetical order is a convention
   - Working with Constraints: keyword "extends" restricts the dynamically set types of T and U to be objects
+
     ```TypeScript
     const merge = <T extends object, U extends object>(objA: T, objB: U) => Object.assign(objA, objB);
     ```
+
   - use interface to indicate TS that every element based on it has a certain property; can also precise the return of this function (-> here Tuple)
+
     ```TypeScript
     interface Lenghty {
       length: number
@@ -438,7 +441,9 @@ type system only helps during development (e.g. before code gets compiled)
       // function logic
     }
     ```
+
   - "keyof" Constraint: use keyword "keyof" to ensure that key exists in object
+
     ```TypeScript
     const extractAndConvert = <T extends object, U extends keyof T>(obj: T, key: U) => {
       return console.log(`Value: ${obj[key]}`);
@@ -458,7 +463,7 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Generic Utility Types:
 
-  > handy built-in utility types: https://www.typescriptlang.org/docs/handbook/utility-types.html
+  > handy built-in utility types: <https://www.typescriptlang.org/docs/handbook/utility-types.html>
 
   - Partial Type: wraps my own created type/interface and sets all properties as optional
 
@@ -483,9 +488,9 @@ type system only helps during development (e.g. before code gets compiled)
   - Union types: defines e.g. in case of "(string | number | boolean)[]" that I'm free to use all these types for the items of array
   - Generic Types: defines dynamically a type e.g. depending on inserted argument type, BUT then locks in this type for entire function or class (-> e.g. string is set internally)
 
-# Decoractors
+## Decoractors
 
-> More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
+> More on Decorators: <https://www.typescriptlang.org/docs/handbook/decorators.html>
 
 - a decorator is a special kind of declaration that can be attached to a class declaration, method, accessor, property or parameter
 - in tsconfig.json set `"experimentalDecorators": true` to be able to use decorators
@@ -549,6 +554,7 @@ type system only helps during development (e.g. before code gets compiled)
 
   - execution of decorator functions is bottom up;
   - BUT: regarding the decorator factories, so the normal invocation with @Logger etc., they run top down
+
     ```TypeScript
     @Logger
     @WithTemplate('<h1>Hello</h1>', 'decoratorId')
@@ -561,6 +567,7 @@ type system only helps during development (e.g. before code gets compiled)
 
   - target of the property (a. if called on an instance, then it's prototype of created obj; b. if static property, target refers to constructor fn);
   - property name
+
     ```TypeScript
     const Log = (target: any, propName: string | Symbol) => {
       console.log('Property decorator: ', target, propName);
@@ -572,6 +579,7 @@ type system only helps during development (e.g. before code gets compiled)
   - target of the property (look above)
   - name of accessor
   - descriptor with TS built-in type PropertyDescriptor
+
     ```TypeScript
     const Log2 = (target: any, name: string, descriptor: PropertyDescriptor) => {
       console.log('Accessor decorator: ', target, name, descriptor)
@@ -626,4 +634,4 @@ type system only helps during development (e.g. before code gets compiled)
 
 - Data Validation with Decorators:
   - look at example in file
-  - recommanded npm class-validator package is e.g. availabe here: https://www.npmjs.com/package/class-validator
+  - recommanded npm class-validator package is e.g. availabe here: <https://www.npmjs.com/package/class-validator>
