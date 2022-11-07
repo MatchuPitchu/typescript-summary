@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Project Manager</title>
+    <link rel="stylesheet" href="app.css" />
+    <script type="module" src="dist/bundle.js"></script>
+  </head>
+  <body>
+    <!-- template HTML Tags: Code inside is not rendered immediately, BUT can be reached by JS to render it when needed -->
+    <template id="project-input">
+      <form>
+        <div class="form-control">
+          <label for="title">Title</label>
+          <input type="text" id="title" />
+        </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea id="description" rows="3"></textarea>
+        </div>
+        <div class="form-control">
+          <label for="people">People</label>
+          <input type="number" id="people" step="1" min="0" max="10" />
+        </div>
+        <button type="submit">ADD PROJECT</button>
+      </form>
+    </template>
+
+    <template id="single-project">
+      <li draggable="true"> <!-- draggable indicates that user can drag element -->
+        <h2></h2> <!-- title of project -->
+        <h3></h3> <!-- number of persons assigned to project -->
+        <p></p> <!-- description of project -->
+      </li>
+    </template>
+    
+    <template id="project-list">
+      <section class="projects">
+        <header>
+          <h2></h2>
+        </header>
+        <ul></ul>
+      </section>
+    </template>
+    
+    <div id="app"></div>
+  </body>
+</html>

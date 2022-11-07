@@ -1,0 +1,32 @@
+{
+  "name": "understanding-typescript",
+  "version": "1.0.0",
+  "description": "Understanding TypeScript Course Setup",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "keywords": [
+    "typescript",
+    "course"
+  ],
+  "author": "Michael Flohr",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.146",
+    "clean-webpack-plugin": "^4.0.0"
+  },
+  "dependencies": {
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.13.1",
+    "lodash": "^4.17.15",
+    "reflect-metadata": "^0.1.13",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}

@@ -4,7 +4,7 @@
 
 ## Official TypeScript Website
 
-> <https://www.typescriptlang.org/>
+> Documentation: <https://www.typescriptlang.org/>
 > Basic Types: <https://www.typescriptlang.org/docs/handbook/2/everyday-types.html>
 
 ## Useful Commands for CLI and Compiling
