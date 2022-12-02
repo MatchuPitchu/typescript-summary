@@ -7,22 +7,23 @@
 - change `object type` into `union type`
 
 ```TypeScript
-export const fruitCount = {
+const fruitCounts = {
   apple: 1,
   pear: 4,
   banana: 26,
 }
 
-type SingleFruitCount1 =
-  | {
-      apple: number
-    }
-  | {
-      banana: number
-    }
-  | {
-      pear: number
-    }
+// Expected result of type after transformation
+// type SingleFruitCount1 =
+//   | {
+//       apple: number
+//     }
+//   | {
+//       banana: number
+//     }
+//   | {
+//       pear: number
+//     }
 
 type FruitCounts = typeof fruitCounts;
 
@@ -53,8 +54,8 @@ export type Entity =
       type: "comment"
     }
 
-// Expected result of type
-// type EntityWithId =
+// Expected result of type after transformation
+// type EntityWithId1 =
 //   | {
   //       type: "user"
 //       userId: string
@@ -68,7 +69,7 @@ export type Entity =
 //       commentId: string
 //     }
 
-type EntityWithId = {
+type EntityWithId2 = {
   [EntityType in Entity['type']]: {
     type: EntityType
   } & Record<`${EntityType}Id`, string>
@@ -132,7 +133,7 @@ function compose<Input, FirstArg, SecondArg, ThirdArg>(
   fn3: (input: SecondArg) => ThirdArg
 ): (input: Input) => ThirdArg;
 
-function compose (...args: any[]) => {
+function compose (...args: any[]) {
   // ... logic
 
   return {} as any;
@@ -186,4 +187,81 @@ type PropsFrom<TComponent> = TComponent extends React.FC<infer Props> ? Props : 
 const props: PropsFrom<typeof MyComponent> = {
   enabled: true,
 }
+```
+
+## Create your own 'objectKeys' function using generics and the 'keyof' operator
+
+> Video and Article: <https://www.totaltypescript.com/tips/create-your-own-objectkeys-function-using-generics-and-the-keyof-operator>
+
+```TypeScript
+const obj3 = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
+
+const objectKeys = <Obj extends {}>(obj: Obj): (keyof Obj)[] => {
+  return Object.keys(obj) as (keyof Obj)[];
+};
+
+// without custom objectKeys fn "key" is only typed as string
+// Object.keys(obj3).forEach((key) => console.log(obj3[key]));
+objectKeys(obj3).forEach((key) => console.log(obj3[key]));
+```
+
+## Create a 'key remover' function which can process any generic object
+
+> Video and Article: <https://www.totaltypescript.com/tips/create-a-key-remover-function-which-can-process-any-generic-object>
+
+```TypeScript
+// function that removes keys from an object
+const makeKeyRemover =
+  <Key extends string>(...keys: Key[]) =>
+  <Obj>(obj: Obj): Omit<Obj, Key> => {
+    return {} as any;
+  };
+
+const keyRemover = makeKeyRemover('a', 'b');
+
+const obj4 = { a: 1, b: 2, c: 3 };
+const newObject = keyRemover(obj4);
+```
+
+## Map over a union type
+
+> Video and Article: <https://www.totaltypescript.com/tips/map-over-a-union-type>
+
+```TypeScript
+type Letters = "a" | "b" | "c";
+
+// you can map over a union with this ternary expression
+// if 'c' is found then "c" is replaced by 'never' or whatever you want
+type RemoveC<TType> = TType extends 'c' ? never : TType;
+
+type LettersWithoutC = RemoveC<Letters>;
+```
+
+## Get a TypeScript package ready for release to NPM in under 2 minutes
+
+> Video and Article: <https://www.totaltypescript.com/tips/get-a-typescript-package-ready-for-release-to-npm-in-under-2-minutes>
+
+- use `preconstruct`: <https://www.npmjs.com/package/@preconstruct/cli>
+
+## Throw detailed error messages for type checks
+
+> Video and Article: <https://www.totaltypescript.com/tips/throw-detailed-error-messages-for-type-checks>
+
+```TypeScript
+// check at type level if argument is of type array -> then return a string "error" message
+type CheckForBadArgs<Arg> = Arg extends any[] ? 'You cannot compare two arrays using deepEqualCompare' : Arg;
+
+const deepEqualCompare = <Arg>(a: CheckForBadArgs<Arg>, b: CheckForBadArgs<Arg>): boolean => {
+  if (Array.isArray(a) || Array.isArray(b)) {
+    throw new Error('You cannot compare two arrays using deepEqualCompare');
+  }
+  return a === b;
+};
+
+deepEqualCompare(1, 1);
+deepEqualCompare([], ['a']);
 ```
