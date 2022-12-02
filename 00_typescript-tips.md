@@ -189,6 +189,38 @@ const props: PropsFrom<typeof MyComponent> = {
 }
 ```
 
+## Use generics in React to make dynamic and flexible components
+
+> Video and Article: <https://www.totaltypescript.com/tips/use-generics-in-react-to-make-dynamic-and-flexible-components>
+
+```TSX
+interface TableProps<TItem> {
+  items: TItem[];
+  renderItem: (item: TItem) => React.ReactNode;
+}
+
+// Generic not allowed with arrow function -> const Table = <TItem>(props: TableProps) => {
+function Table<TItem>(props: TableProps<TItem>) {
+  return null
+};
+
+const Component = () => {
+  return (
+    // OPTION: to replace the generic type for a specific component usage: <Table<{ id: number }> ...
+    <Table
+      items={[
+        {
+          id: '1',
+          name: 'Matchu',
+        }
+      ]}
+      renderItem={(item) => <div>{item.id}</div>}
+    ></Table>
+  );
+}
+
+```
+
 ## Create your own 'objectKeys' function using generics and the 'keyof' operator
 
 > Video and Article: <https://www.totaltypescript.com/tips/create-your-own-objectkeys-function-using-generics-and-the-keyof-operator>
@@ -264,4 +296,36 @@ const deepEqualCompare = <Arg>(a: CheckForBadArgs<Arg>, b: CheckForBadArgs<Arg>)
 
 deepEqualCompare(1, 1);
 deepEqualCompare([], ['a']);
+```
+
+## Create autocomplete helper which allows for arbitrary values
+
+> Video and Article: <https://www.totaltypescript.com/tips/create-autocomplete-helper-which-allows-for-arbitrary-values>
+
+```TSX
+// a) with "string" you would lose autocomplete functionality for 'sm' and 'xs'
+type IconSize = 'sm' | 'xs' | string;
+// b) use Omit utility type: you omit xs or sm from the union, and now TS won't collapse these three things and you'll have autocomplete again
+type IconSize2 = 'sm' | 'xs' | Omit<string, 'xs' | 'sm'>;
+// c) convert b) into type helper
+type IconSize3 = LooseAutocomplete<'sm' | 'xs'>;
+type LooseAutocomplete<T extends string> = T | Omit<string, T>
+
+
+interface IconmProps {
+  size: IconSize3;
+}
+
+const Icon = (props: IconmProps) => {
+  return null;
+};
+
+const Component = () => {
+  return (
+    <>
+      <Icon size='xs'></Icon>
+      <Icon size='something'></Icon>
+    </>
+  )
+}
 ```

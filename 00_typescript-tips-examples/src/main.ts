@@ -185,3 +185,31 @@ const deepEqualCompare = <Arg>(a: CheckForBadArgs<Arg>, b: CheckForBadArgs<Arg>)
 
 deepEqualCompare(1, 1);
 deepEqualCompare([], ['a']);
+
+/*********************** ***********************/
+// [9] Create autocomplete helper which allows for arbitrary values
+// a) with "string" you would lose autocomplete functionality for 'sm' and 'xs'
+type IconSize = 'sm' | 'xs' | string;
+// b) use Omit utility type: you omit xs or sm from the union, and now TS won't collapse these three things and you'll have autocomplete again
+type IconSize2 = 'sm' | 'xs' | Omit<string, 'xs' | 'sm'>;
+// c) convert b) into type helper
+type IconSize3 = LooseAutocomplete<'sm' | 'xs'>;
+type LooseAutocomplete<T extends string> = T | Omit<string, T>
+
+
+interface IconmProps {
+  size: IconSize3;
+}
+
+const Icon = (props: IconmProps) => {
+  return null;
+};
+
+const Component = () => {
+  return (
+    // <>
+    //   <Icon size='xs'></Icon>
+    //   <Icon size='something'></Icon>
+    // </>
+  )
+}
