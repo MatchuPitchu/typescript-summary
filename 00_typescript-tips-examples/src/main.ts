@@ -194,8 +194,7 @@ type IconSize = 'sm' | 'xs' | string;
 type IconSize2 = 'sm' | 'xs' | Omit<string, 'xs' | 'sm'>;
 // c) convert b) into type helper
 type IconSize3 = LooseAutocomplete<'sm' | 'xs'>;
-type LooseAutocomplete<T extends string> = T | Omit<string, T>
-
+type LooseAutocomplete<T extends string> = T | Omit<string, T>;
 
 interface IconmProps {
   size: IconSize3;
@@ -206,10 +205,22 @@ const Icon = (props: IconmProps) => {
 };
 
 const Component = () => {
-  return (
-    // <>
-    //   <Icon size='xs'></Icon>
-    //   <Icon size='something'></Icon>
-    // </>
-  )
-}
+  // return (
+  //   <>
+  //     <Icon size='xs'></Icon>
+  //     <Icon size='something'></Icon>
+  //   </>
+  // )
+};
+
+/*********************** ***********************/
+// [10] Turn a module into a type
+// a) this is a module file: contants.ts
+export const ADD_TODO = 'ADD_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+
+// b) derive a type that looks like the union type below
+// type Action = 'ADD_TODO' | 'REMOVE_TODO' | 'EDIT_TODO';
+type ActionModule = typeof import('./contants');
+type Action = ActionModule[keyof ActionModule]; // take keys of type object and maps over them to create a union type

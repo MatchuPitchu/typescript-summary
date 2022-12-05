@@ -329,3 +329,19 @@ const Component = () => {
   )
 }
 ```
+
+## Turn a module into a type
+
+> Video and Article: <https://www.totaltypescript.com/tips/turn-a-module-into-a-type>
+
+```TypeScript
+// a) this is a module file: contants.ts
+export const ADD_TODO = 'ADD_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+
+// b) derive a type that looks like the union type below
+// type Action = 'ADD_TODO' | 'REMOVE_TODO' | 'EDIT_TODO';
+type ActionModule = typeof import('./contants');
+type Action = ActionModule[keyof ActionModule]; // take keys of type object and maps over them to create a union type
+```
