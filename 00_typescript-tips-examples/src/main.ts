@@ -1,4 +1,5 @@
 import { String, Union } from 'ts-toolbelt';
+import * from './mapped-types'
 
 /*********************** ***********************/
 // [1] Derive a union type from an object
@@ -215,12 +216,12 @@ const Component = () => {
 
 /*********************** ***********************/
 // [10] Turn a module into a type
-// a) this is a module file: contants.ts
-export const ADD_TODO = 'ADD_TODO';
-export const REMOVE_TODO = 'REMOVE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
+// a) this is a module file: constants.ts
+// export const ADD_TODO = 'ADD_TODO';
+// export const REMOVE_TODO = 'REMOVE_TODO';
+// export const EDIT_TODO = 'EDIT_TODO';
 
 // b) derive a type that looks like the union type below
 // type Action = 'ADD_TODO' | 'REMOVE_TODO' | 'EDIT_TODO';
-type ActionModule = typeof import('./contants');
+type ActionModule = typeof import('./constants');
 type Action = ActionModule[keyof ActionModule]; // take keys of type object and maps over them to create a union type
