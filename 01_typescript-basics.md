@@ -41,7 +41,7 @@
     ]
   ```
 
-### TypeScript Execution in Node.js without Precompiling
+### TypeScript Execution in Node.js without Precompiling (like tsc)
 
 > Documentation. <https://typestrong.org/ts-node/docs/>
 
