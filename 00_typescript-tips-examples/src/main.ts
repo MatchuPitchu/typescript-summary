@@ -1,5 +1,5 @@
 import { String, Union } from 'ts-toolbelt';
-import * from './mapped-types'
+import './mapped-types';
 
 /*********************** ***********************/
 // [1] Derive a union type from an object
