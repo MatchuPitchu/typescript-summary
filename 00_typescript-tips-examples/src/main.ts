@@ -1,3 +1,4 @@
+import './advanced-event-handling';
 import './enums-and-literals';
 import './generics';
 import './generics-with-keyof';
