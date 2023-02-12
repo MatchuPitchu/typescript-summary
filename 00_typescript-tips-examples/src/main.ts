@@ -2,6 +2,7 @@ import { String, Union } from 'ts-toolbelt';
 import './mapped-types';
 import './generics';
 import './generics-with-keyof';
+import './utility-types';
 
 /*********************** ***********************/
 // [1] Derive a union type from an object
