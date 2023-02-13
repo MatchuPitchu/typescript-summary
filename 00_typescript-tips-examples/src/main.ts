@@ -1,5 +1,6 @@
 import './advanced-event-handling';
 import './enums-and-literals';
+import './function-overloading';
 import './generics';
 import './generics-with-keyof';
 import './mapped-types';
