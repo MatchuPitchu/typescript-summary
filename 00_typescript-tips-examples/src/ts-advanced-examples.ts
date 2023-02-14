@@ -184,7 +184,7 @@ const deepEqualCompare = <Arg>(a: CheckForBadArgs<Arg>, b: CheckForBadArgs<Arg>)
 };
 
 deepEqualCompare(1, 1);
-deepEqualCompare([], ['a']);
+// deepEqualCompare([], ['a']); // Uncaught Error: You cannot compare two arrays using deepEqualCompare
 
 /*********************** ***********************/
 // [9] Create autocomplete helper which allows for arbitrary values
