@@ -28,13 +28,15 @@ export const mapById = (users: MyUser[]): Record<MyUser['id'], UserWithoutID> =>
   }, {});
 };
 
-const mappedUsers = mapById([
+const users = [
   {
     id: 1,
     name: 'Matchu',
   },
   { id: 2, name: 'Pitchu' },
-]); // { 1: { name: 'Matchu' }, 2: { name: 'Pitchu' } };
+];
+
+console.log('mapById', mapById(users)); // { 1: { name: 'Matchu' }, 2: { name: 'Pitchu' } };
 
 // FUNCTIONS
 // Parameters<T> and ReturnType<T>
