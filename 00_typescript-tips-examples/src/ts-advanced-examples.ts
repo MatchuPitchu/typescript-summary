@@ -189,18 +189,20 @@ deepEqualCompare(1, 1);
 /*********************** ***********************/
 // [9] Create autocomplete helper which allows for arbitrary values
 // a) with "string" you would lose autocomplete functionality for 'sm' and 'xs'
-type IconSize = 'sm' | 'xs' | string;
-// b) use Omit utility type: you omit xs or sm from the union, and now TS won't collapse these three things and you'll have autocomplete again
-type IconSize2 = 'sm' | 'xs' | Omit<string, 'xs' | 'sm'>;
-// c) convert b) into type helper
-type IconSize3 = LooseAutocomplete<'sm' | 'xs'>;
-type LooseAutocomplete<T extends string> = T | Omit<string, T>;
+type IconSizeNoAutocomplete = 'sm' | 'xs' | string;
 
-interface IconmProps {
-  size: IconSize3;
+// b) use Omit utility type: you omit xs or sm from the union, and now TS won't collapse these three things and you'll have autocomplete again
+type IconSizeAutocomplete = 'sm' | 'xs' | Omit<string, 'xs' | 'sm'>;
+
+// c) convert b) into type helper
+type KeepAutocomplete<T extends string> = T | Omit<string, T>;
+type IconSize = KeepAutocomplete<'sm' | 'xs'>;
+
+interface IconProps {
+  size: IconSize;
 }
 
-const Icon = (props: IconmProps) => {
+const Icon = (props: IconProps) => {
   return null;
 };
 
