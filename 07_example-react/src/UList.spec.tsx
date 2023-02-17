@@ -20,6 +20,7 @@ describe('UList Component', () => {
     render(<UList items={items} render={renderItem} handleItemClick={handleItemClick} />);
 
     const listItems = screen.getAllByRole('listitem');
+
     expect(listItems).toHaveLength(items.length);
 
     listItems.forEach((item, index) => {

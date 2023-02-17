@@ -1,3 +1,5 @@
+// V1: custom hook for todos
+// V2: global TodoContext replaces this custom hook
 import { useCallback, useReducer } from 'react';
 
 interface Todo {

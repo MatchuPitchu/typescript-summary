@@ -1,12 +1,12 @@
 import { useRef } from 'react';
-import { useTodos } from './hooks/useTodos';
-import './App.css';
+import { TodosProvider, useTodosContext } from './context/TodoContext';
 import { UList } from './UList';
+import './App.css';
 
-const initialTodoState = [{ id: crypto.randomUUID(), text: 'learn react', done: false }];
+const initialTodos = [{ id: crypto.randomUUID(), text: 'learn react', done: false }];
 
-export const App = () => {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodoState);
+const App = () => {
+  const { todos, addTodo, removeTodo } = useTodosContext();
 
   const todoInputRef = useRef<HTMLInputElement>(null);
 
@@ -23,14 +23,14 @@ export const App = () => {
       <input type='text' ref={todoInputRef} />
 
       {/* V1: todos list */}
-      <ul>
+      {/* <ul>
         {todos.map(({ id, text }) => (
           <li key={id}>
             {text}
             <button onClick={() => handleRemoveTodo(id)}>Remove</button>
           </li>
         ))}
-      </ul>
+      </ul> */}
 
       {/* V2: generic UL component */}
       <UList
@@ -56,5 +56,16 @@ export const App = () => {
 
       <button onClick={handleAddTodo}>Add Todo</button>
     </div>
+  );
+};
+
+export const AppWrapper = () => {
+  return (
+    <TodosProvider initialTodos={initialTodos}>
+      <div className='app-wrapper'>
+        <App></App>
+        <App></App>
+      </div>
+    </TodosProvider>
   );
 };
