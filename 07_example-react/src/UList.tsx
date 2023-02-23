@@ -4,13 +4,13 @@ import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/1349b640d4d07f40aa7c1c6931f18e3fbf667f3a/types/react/index.d.ts#L3080
 type UListElement = DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
 
+// PropsWithChildren<TUList<T>> would add children prop
 type TUList<T> = UListElement & {
   items: T[];
   render: (item: T) => ReactNode;
   handleItemClick: (item: T) => void;
 };
 
-// PropsWithChildren<TUList<T>> would add children prop
 export const UList = <T extends { id: string; text: string }>({
   items,
   render,
