@@ -166,10 +166,13 @@ const newObject = keyRemover(obj4);
 type Letters = 'a' | 'b' | 'c';
 
 // you can map over a union with this ternary expression
-// if 'c' is found then "c" is replaced by 'never' or whatever you want
-type RemoveC<TType> = TType extends 'c' ? never : TType;
+// if 'c' is found then "c" is replaced by 'never' (means removed from Union Type)
+// or whatever you want
+type RemoveC<TType> = TType extends 'c' ? 'never' : TType;
+type ReplaceAByZ<TType> = TType extends 'a' ? 'z' : TType;
 
 type LettersWithoutC = RemoveC<Letters>;
+type LettersWithZInsteadOfA = ReplaceAByZ<Letters>;
 
 /*********************** ***********************/
 // [8] Throw detailed error messages for type checks
@@ -226,3 +229,43 @@ const Component = () => {
 // type Action = 'ADD_TODO' | 'REMOVE_TODO' | 'EDIT_TODO';
 type ActionModule = typeof import('./constants');
 type Action = ActionModule[keyof ActionModule]; // take keys of type object and maps over them to create a union type
+
+// [11] Use generics to dynamically specify the number, and type, of arguments to functions
+export type Event =
+  | {
+      type: 'LOG_IN';
+      payload: {
+        userId: string;
+      };
+    }
+  | { type: 'SIGN_OUT' };
+
+// V1: not sufficient
+// const sendEvent = (eventType: Event['type'], payload?: any) => {};
+
+// V2: perfect inference if payload is needed as argument or not
+// you can define names for arguments in Conditional Typing -> [type: ..., payload: ...]
+const sendEvent = <Type extends Event['type']>(
+  ...args: Extract<Event, { type: Type }> extends { payload: infer TPayload }
+    ? [type: Type, payload: TPayload]
+    : [type: Type]
+) => {};
+
+// this should give errors
+sendEvent('SIGN_OUT', {});
+sendEvent('LOG_IN', { userId: 123 });
+sendEvent('LOG_IN', {});
+sendEvent('LOG_IN');
+
+// [12] Make accessing objects safer by enabling 'noUncheckedIndexedAccess' in tsconfig
+export const myObj: Record<string, string[]> = {};
+// would create runtime error, since no foo property
+// this setting in tsconfig.json shows directly type error
+// that you can prevent with type checking
+// "noUncheckedIndexedAccess": true
+myObj.foo.push('bar');
+
+if (!myObj.foo) {
+  myObj.foo = [];
+}
+myObj.foo.push('bar');
