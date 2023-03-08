@@ -87,8 +87,44 @@ console.log(
 ); // ['Matchu Pitchu', 'Ken Guru'];
 
 // Extract<Type, Union>
-// Constructs a type by extracting from Type all union members that are assignable to Union
-type T0 = Extract<'a' | 'b' | 'c', 'a' | 'f'>;
-// type T0 = "a"
-type T1 = Extract<string | number | (() => void), Function>;
-// type T1 = () => void
+// utility for pulling out values that are shared between the two type arguments it receives
+// constructs a type by extracting from Type all union members that are assignable to Union
+type E0 = Extract<'a' | 'b' | 'c', 'a' | 'f'>;
+// type E0 = "a"
+type E1 = Extract<string | number | (() => void), Function>;
+// type E1 = () => void
+type E2 = Extract<{ type: 'LOGIN'; id: string }, { type: 'LOGIN' }>;
+// type E2 = { type: 'LOGIN'; id: string }
+
+interface User {
+  name: string;
+  email: string;
+}
+
+interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+}
+
+type E3 = Extract<keyof User, keyof UserProfile>;
+// type E3 = "email" | "name"
+
+// create directly a new object type with the shared properties of 2 types
+type IntersectionObj<T, U> = {
+  [Property in Extract<keyof T, keyof U>]: T[Property];
+};
+
+type E4 = IntersectionObj<User, UserProfile>;
+// type E4 = { email: string; name: string }
+
+// Exclude<Type, Union>
+// inverse of Exclude, returns all of the values present in T, but not in U
+type Exc1 = Exclude<keyof UserProfile, keyof User>;
+// type Exc1 = "id" | "image"
+
+// NonNullable<Type>
+// Constructs a type by excluding null and undefined from Type
+type N1 = NonNullable<string[] | null | undefined>;
+// type N1 = string[]
