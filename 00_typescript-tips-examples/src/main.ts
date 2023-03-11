@@ -5,6 +5,7 @@
 // import './generics-with-keyof';
 // import './mapped-types';
 // import './mixins';
+import './patterns';
 // import './readonly';
 // import './ts-advanced-examples';
-import './utility-types';
+// import './utility-types';
