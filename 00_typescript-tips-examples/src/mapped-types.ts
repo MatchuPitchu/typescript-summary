@@ -10,29 +10,29 @@ type GetUser = {
   getName: () => string;
 };
 
-// create target typpe automatically with a mapped type
+// create target type automatically with a mapped type
 type Getters<Type> = {
   [Property in keyof Type as `get${Capitalize<string & Property>}`]: () => Type[Property];
 };
 
 // step by step explanation
-type Getters1<Type> = {
+type Copy<Type> = {
   [Property in keyof Type]: Type[Property];
 };
 
-type UserCopy = Getters1<User>;
+type UserCopy = Copy<User>;
 
-type Getters2<Type> = {
+type CopyAndTransform<Type> = {
   [Property in keyof Type]: () => Type[Property];
 };
 
-type UserCopyAndTransformed = Getters2<User>;
+type UserCopyAndTransformed = CopyAndTransform<User>;
 
-type Getters3<Type> = {
+type GettersWithoutCapitalize<Type> = {
   [Property in keyof Type as `get${string & Property}`]: () => Type[Property];
 };
 
-type UserGetters1 = Getters3<User>;
+type UserGetters = GettersWithoutCapitalize<User>;
 
 // adding additional abstraction
 type Prefix<Type, Prefix extends string> = {
@@ -44,21 +44,21 @@ type Suffix<Type, Suffix extends string> = {
 };
 
 // with prefix
-type GetterNames<Type> = Prefix<Type, 'get'>;
+type GetterNamesOf<Type> = Prefix<Type, 'get'>;
 
-type GetterFunctions<Type> = {
+type FunctionTypesOf<Type> = {
   [Property in keyof Type]: () => Type[Property];
 };
 
-// 1) e.g. User is transformed in GetterNames<User> to type User = { getName: string }
-// 2) e.g. User of 1) is transformed in GetterFunctions<User> to type User = { getName: () => string }
-type Getters4<Type> = GetterFunctions<GetterNames<Type>>;
+// 1) e.g. User is transformed in GetterNamesOf<User> to type User = { getName: string }
+// 2) e.g. User of 1) is transformed in FunctionTypesOf<User> to type User = { getName: () => string }
+type GettersOf<Type> = FunctionTypesOf<GetterNamesOf<Type>>;
 
-type UserGettersPrefix = Getters4<User>;
+type UserGettersPrefix = GettersOf<User>;
 
 // with suffix
-type SuffixNames<Type> = Suffix<Type, 'handler'>;
+type SuffixNamesOf<Type> = Suffix<Type, 'handler'>;
 
-type Getters5<Type> = GetterFunctions<SuffixNames<Type>>;
+type Handlers<Type> = FunctionTypesOf<SuffixNamesOf<Type>>;
 
-type UserGettersSuffix = Getters5<User>;
+type UserHandlersSuffix = Handlers<User>;

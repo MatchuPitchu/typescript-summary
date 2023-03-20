@@ -41,6 +41,16 @@
     ]
   ```
 
+### TypeScript Execution in Node.js without Precompiling (like tsc)
+
+> Documentation. <https://typestrong.org/ts-node/docs/>
+
+```txt
+# Locally in your project.
+npm install -D typescript
+npm install -D ts-node
+```
+
 ## Primitive Types and Reference Types
 
 - Primitives: const, let, var, strings, booleans, undefined, null

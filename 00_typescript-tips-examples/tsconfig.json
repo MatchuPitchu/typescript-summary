@@ -13,7 +13,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "sourceMap": true
   },
   "include": ["src"]
 }
