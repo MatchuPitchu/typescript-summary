@@ -5,9 +5,12 @@
 // import './generics-with-keyof';
 // import './mapped-types';
 // import './mixins';
-// import './pattern-handler';
-// import './pattern-subscribe';
 // import './readonly';
-import './satisfies';
+// import './satisfies';
 // import './ts-advanced-examples';
 // import './utility-types';
+
+// import './patterns/pattern-visitor';
+// import './patterns/pattern-handler';
+// import './patterns/pattern-subscribe';
+import './patterns/pattern-iterator';
