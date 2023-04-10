@@ -11,7 +11,8 @@ const color1: ColorObj = {
 const { rgb, hex } = color1; // both of type: RGB | `#${string}`
 
 // typed with new satisfies operator: TypeScript 4.9
-// let validate that the type of an expression matches some type, without changing the resulting type of that expression
+// let validate that the type of an expression matches some type,
+// without changing the resulting type of that expression
 // -> example below: all properties of color2 obj are compatible with ColorObj
 const color2 = {
   rgb: [255, 0, 0],

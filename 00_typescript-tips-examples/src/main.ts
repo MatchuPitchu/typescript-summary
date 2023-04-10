@@ -13,4 +13,4 @@
 // import './patterns/pattern-visitor';
 // import './patterns/pattern-handler';
 // import './patterns/pattern-subscribe';
-import './patterns/pattern-iterator';
+// import './patterns/pattern-iterator';

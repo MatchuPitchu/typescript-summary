@@ -257,7 +257,8 @@ sendEvent('LOG_IN', { userId: 123 });
 sendEvent('LOG_IN', {});
 sendEvent('LOG_IN');
 
-// [12] Make accessing objects safer by enabling 'noUncheckedIndexedAccess' in tsconfig
+/*********************** ***********************/
+// [11] Make accessing objects safer by enabling 'noUncheckedIndexedAccess' in tsconfig
 export const myObj: Record<string, string[]> = {};
 // would create runtime error, since no foo property
 // this setting in tsconfig.json shows directly type error
@@ -269,3 +270,21 @@ if (!myObj.foo) {
   myObj.foo = [];
 }
 myObj.foo.push('bar');
+
+/*********************** ***********************/
+// [12] const annotation (new in TypeScript 5.0)
+const routes = <const T>(routes: T[]) => {
+  const addRedirect = (from: T, to: T) => {
+    // ... implementation
+  };
+
+  return {
+    addRedirect,
+  };
+};
+
+const router = routes(['/users', '/admin/users']);
+// with generic <T> for routes fn: (from: string, to: string) => void
+// because T is infered as string
+// with new <const T>: (from: "/users" | "/admin/users", to: "/users" | "/admin/users") => void
+router.addRedirect('/admin/users', '/users');
