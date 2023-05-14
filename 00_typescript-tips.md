@@ -189,6 +189,42 @@ const props: PropsFrom<typeof MyComponent> = {
 }
 ```
 
+## Add HTML Props to React Components
+
+> Article: <https://www.totaltypescript.com/tutorials/react-with-typescript/components/using-html-props-in-react-components/solution>
+
+- use the `ComponentProps` type helper of React
+
+```tsx
+// V1
+// type Props = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+// V2
+type Props = React.ComponentProps<'button'>;
+
+const Button = ({ className, ...rest }: Props) => {
+  return <button className={`default-class ${className}`} {...rest}></button>;
+};
+```
+
+## Techniques for Overriding Native Props in React
+
+> Article: <https://www.totaltypescript.com/tutorials/react-with-typescript/components/overriding-and-removing-component-props/solution>
+
+```tsx
+type OverrideProps<T, TOverridden> = Omit<T, keyof TOverridden> & TOverridden;
+
+type UpdatedProps = {
+  onChange: (value: string) => void;
+};
+
+type InputProps = OverrideProps<ComponentProps<'input'>, UpdatedProps>;
+
+export const Input = (props: InputProps) => {
+  return <input {...props} onChange={(event) => props.onChange(event.target.value)} />;
+};
+```
+
 ## Use generics in React to make dynamic and flexible components
 
 > Video and Article: <https://www.totaltypescript.com/tips/use-generics-in-react-to-make-dynamic-and-flexible-components>
@@ -218,7 +254,6 @@ const Component = () => {
     ></Table>
   );
 }
-
 ```
 
 ## Create your own 'objectKeys' function using generics and the 'keyof' operator
