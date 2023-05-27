@@ -5,7 +5,18 @@
   text-align: center;
 }
 
-.app-wrapper {
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.app > * {
+  padding: 2rem;
+  border: 1px solid #4a4a4a;
+}
+
+.wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 2rem;
