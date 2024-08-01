@@ -1,5 +1,5 @@
 // Handlers Patterns
-import fs from 'fs';
+import * as fs from 'node:fs';
 
 export const createHandlerStack = <MessageType>() => {
   const subscribers: Set<(msg: MessageType) => undefined | unknown> = new Set();

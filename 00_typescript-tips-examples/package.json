@@ -2,17 +2,13 @@
   "name": "00_typescript-tips-examples",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "ts": "ts-node-esm"
+    "ts": "ts-node"
   },
   "devDependencies": {
-    "ts-node": "^10.9.1",
-    "ts-toolbelt": "^9.6.0",
-    "typescript": "^5.0.4",
-    "vite": "^3.2.3"
+    "@types/node": "^22.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "ts-toolbelt": "^9.6.0"
   }
 }

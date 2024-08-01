@@ -3,7 +3,7 @@ interface Rank<RankItem> {
   rank: number;
 }
 
-export const ranker = <RankItem>(items: RankItem[], rank: (value: RankItem) => number): RankItem[] => {
+const ranker = <RankItem>(items: RankItem[], rank: (value: RankItem) => number): RankItem[] => {
   const ranks: Rank<RankItem>[] = items.map((item) => ({
     item,
     rank: rank(item),

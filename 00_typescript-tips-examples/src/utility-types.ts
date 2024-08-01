@@ -18,7 +18,7 @@ type JustEmailAndName = Pick<MyUser, 'email' | 'name'>;
 type UserWithoutID = Omit<MyUser, 'id'>;
 
 // Record
-export const mapById = (users: MyUser[]): Record<MyUser['id'], UserWithoutID> => {
+const mapById = (users: MyUser[]): Record<MyUser['id'], UserWithoutID> => {
   return users.reduce((accumulator, user) => {
     const { id, ...rest } = user;
     return {

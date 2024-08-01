@@ -1,7 +1,7 @@
 // TypeScript Mapped Types
 // A mapped type has this formula: type B = type A + transformation
 // https://www.lloydatkinson.net/posts/2022/going-further-with-typescript-part-1/
-export type User = {
+type User = {
   name: string;
 };
 

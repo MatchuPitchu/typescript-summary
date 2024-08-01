@@ -44,5 +44,3 @@ console.log('4', cStack_2.undo());
 const setTo42 = createSetValue(42);
 console.log('5', cStack_2.execute(setTo42));
 console.log('6', cStack_2.undo());
-
-export {};

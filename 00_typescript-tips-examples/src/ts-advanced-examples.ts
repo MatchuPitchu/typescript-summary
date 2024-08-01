@@ -34,7 +34,7 @@ const singleFruitCount: SingleFruitCount2 = {
 
 /*********************** ***********************/
 // [2] Use 'in' operator to transform a union to another union
-export type Entity =
+type Entity =
   | {
       type: 'user';
     }

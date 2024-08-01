@@ -1,5 +1,3 @@
-export {};
-
 const createLoggerFunction = () => {
   return (str: string) => console.log(str);
 };

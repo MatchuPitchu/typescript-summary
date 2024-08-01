@@ -1,7 +1,7 @@
-export type ColorType = 'rgb' | 'hex';
-export type RGB = [number, number, number];
-export type HEX = `#${string}`;
-export type ColorObj = Record<ColorType, RGB | HEX>;
+type ColorType = 'rgb' | 'hex';
+type RGB = [number, number, number];
+type HEX = `#${string}`;
+type ColorObj = Record<ColorType, RGB | HEX>;
 
 const color1: ColorObj = {
   rgb: [255, 0, 0],

@@ -1,5 +1,3 @@
-export {};
-
 interface Cat {
   readonly name: string; // makes specific property readonly
   breed: string;

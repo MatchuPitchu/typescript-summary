@@ -5,7 +5,7 @@ interface Pokemon {
   url: string;
 }
 
-export async function* iterateResults<DataType>(url: string) {
+async function* iterateResults<DataType>(url: string) {
   let nextUrl: string | undefined = url;
   do {
     const response = await fetch(nextUrl);

@@ -1,8 +1,5 @@
 // Example 1
-export const pluckOut = <DataType, KeyType extends keyof DataType>(
-  items: DataType[],
-  key: KeyType
-): DataType[KeyType][] => {
+const pluckOut = <DataType, KeyType extends keyof DataType>(items: DataType[], key: KeyType): DataType[KeyType][] => {
   return items.map((item) => item[key]);
 };
 

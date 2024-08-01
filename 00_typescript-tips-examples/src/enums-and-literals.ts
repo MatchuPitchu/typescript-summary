@@ -1,5 +1,3 @@
-export {};
-
 // Enumeration
 enum LoadingState {
   BEFORE_LOAD = 'beforeLoad',

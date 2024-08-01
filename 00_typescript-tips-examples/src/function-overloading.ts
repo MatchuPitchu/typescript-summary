@@ -1,5 +1,3 @@
-export {};
-
 interface PokemonResults {
   count: number;
   next?: string;

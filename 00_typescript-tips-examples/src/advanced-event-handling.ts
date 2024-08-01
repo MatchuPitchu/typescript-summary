@@ -1,5 +1,3 @@
-export {};
-
 type Handler<T> = {
   [Property in keyof T as `map${Capitalize<Property & string>}`]?: (data: T[Property]) => T[Property];
 } & {

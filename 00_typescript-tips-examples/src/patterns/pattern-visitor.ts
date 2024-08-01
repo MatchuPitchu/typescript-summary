@@ -24,7 +24,7 @@ interface Pokemon {
 }
 
 // V1 Function approach
-export const visit = async <DataType>(baseUrl: string, visitor: (results: DataType[]) => void) => {
+const visit = async <DataType>(baseUrl: string, visitor: (results: DataType[]) => void) => {
   let nextUrl: string | undefined = baseUrl;
   do {
     const response = await fetch(nextUrl);
@@ -39,7 +39,7 @@ visit<Pokemon[]>('https://pokeapi.co/api/v2/pokemon', (results) => {
 });
 
 // V2 Class approach
-export class VisitAllPages<DataType> {
+class VisitAllPages<DataType> {
   constructor(private baseUrl: string) {}
 
   async visit(visitor: (results: DataType[]) => void) {

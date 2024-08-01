@@ -1,7 +1,7 @@
 // Pub and Sub Patterns
 
 // VERSION 1: Pub-Sub Function Variant
-export const createSubscribable = <MessageType>() => {
+const createSubscribable = <MessageType>() => {
   const subscribers: Set<(msg: MessageType) => void> = new Set();
 
   // return object with methods that handle subscribers Set
@@ -32,7 +32,7 @@ sub.publish('hello'); // not logged after unsubscribe
 // VERSION 2: Pub-Sub Class Variant
 // Step 1
 // Create Subscribable class
-export class Subscribable<MessageType> {
+class Subscribable<MessageType> {
   private subscribers: Set<(msg: MessageType) => void> = new Set();
 
   constructor() {}
