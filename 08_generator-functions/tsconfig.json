@@ -1,5 +1,5 @@
-// https://www.totaltypescript.com/tsconfig-cheat-sheet
 {
+  // https://www.totaltypescript.com/tsconfig-cheat-sheet
   "compilerOptions": {
     /* Base Options: */
     "esModuleInterop": true,
@@ -20,5 +20,5 @@
     /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"]
   },
-  "include": ["src"]
+  "include": ["**/*.ts"]
 }

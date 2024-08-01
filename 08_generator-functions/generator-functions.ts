@@ -15,7 +15,7 @@ const fakeDataGenerator = {
 const fakeData = [...fakeDataGenerator];
 console.log('Data Generator', fakeData);
 
-function* numberCreator() {
+function* infiniteNumberCreator() {
   let count = 1;
   while (true) {
     yield count;
@@ -23,15 +23,15 @@ function* numberCreator() {
   }
 }
 
-function* take(n: number, iterable: Iterable<number>) {
+function* take<T>(count: number, iterable: Iterable<T>) {
   for (const item of iterable) {
-    if (n <= 0) return;
-    n--;
+    if (count <= 0) return;
+    count--;
     yield item;
   }
 }
 
-const taken = [...take(10, numberCreator())];
+const taken = [...take(10, infiniteNumberCreator())];
 console.log('Taken', taken);
 
 function* map<T>(iterable: Iterable<T>, mapFn: (value: T) => T) {
@@ -43,7 +43,7 @@ function* map<T>(iterable: Iterable<T>, mapFn: (value: T) => T) {
 const squares = [
   ...take(
     10,
-    map(numberCreator(), (value) => value * value)
+    map(infiniteNumberCreator(), (value) => value * value)
   ),
 ];
 console.log('Squares', squares);
