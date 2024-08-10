@@ -1,13 +1,25 @@
 // Youtube Vortrag "The Power of JS Generators by Anjana Vakil"
 // https://www.youtube.com/watch?v=gu3FfmgkwUc
 
+// const fakeDataGenerator = {
+//   cars: ['VW', 'Skoda'],
+//   cities: ['Berlin', 'Dortmund', 'München'],
+//   [Symbol.iterator]: function* () {
+//     for (const car of this.cars) {
+//       for (let i = 1; i <= 5; i++) yield `${car} No.${i}`;
+//       for (const city of this.cities) yield `${car} in ${city}`;
+//     }
+//   },
+// };
+
+// const fakeData = [...fakeDataGenerator];
+
 const fakeDataGenerator = {
-  cars: ['VW', 'Skoda'],
-  cities: ['Berlin', 'Dortmund', 'München'],
+  components: ['Button', 'Input', 'Card'],
+  sizes: ['sm', 'md', 'lg'],
   [Symbol.iterator]: function* () {
-    for (const car of this.cars) {
-      for (let i = 1; i <= 5; i++) yield `${car} No.${i}`;
-      for (const city of this.cities) yield `${car} in ${city}`;
+    for (const component of this.components) {
+      for (const size of this.sizes) yield `${component} (${size})`;
     }
   },
 };

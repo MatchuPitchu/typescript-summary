@@ -23,3 +23,11 @@ const color2 = {
 const rgb2 = color2.rgb; // [number, number, number]
 const hex2 = color2.hex; // type "#ffffff"
 const rgb3 = color2.rgb[3]; // TS Error: Tuple type '[number, number, number]' of length '3' has no element at index '3'.
+
+type Theme = Record<string, RGB | HEX>;
+
+const theme = {
+  color: '#ffffff',
+} as const satisfies Theme; // with `as const` to the narrowest possible type
+const themeColor = theme.color; // autocompletion
+//    ^?
