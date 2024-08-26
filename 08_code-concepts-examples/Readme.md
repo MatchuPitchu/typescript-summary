@@ -2,4 +2,7 @@
 
 ```sh
 npx ts-node example.ts
+
+# or (see package.json)
+pnpm ts-node example.ts
 ```

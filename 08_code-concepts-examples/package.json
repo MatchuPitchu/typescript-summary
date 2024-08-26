@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts-node": "ts-node proxy.ts"
+    "ts-node": "ts-node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^22.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
