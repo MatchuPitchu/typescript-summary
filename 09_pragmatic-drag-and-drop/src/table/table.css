@@ -1,0 +1,58 @@
+.table {
+  width: 100%;
+}
+
+.th {
+  border-bottom: 2px solid #ffffff;
+  /* Need position:relative so our drop indicator (which uses position:absolute) can be
+	 correctly positioned inside */
+  position: relative;
+  /* using border box sizing as that is what we will be applying as the width for `--local-resizing-width` */
+  width: var(--local-resizing-width);
+  box-sizing: border-box;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.th--dragging {
+  background-color: #091e4224;
+  color: #091e424f;
+}
+
+.resizer {
+  --resizer-width: 24px;
+  position: absolute;
+  top: 0;
+  right: calc(-1 * calc(var(--resizer-width) / 2));
+  width: var(--resizer-width);
+  height: var(--table-height, 100px);
+  cursor: col-resize;
+  flex-grow: 0;
+}
+
+.resizer::before {
+  --line-width: 2px;
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: calc(50% - calc(var(--line-width) / 2));
+  background-color: #907101;
+  width: var(--line-width);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.resizer:hover::before {
+  opacity: 1;
+}
+
+.resizer--resizing {
+  /* turning off the resizing cursor as sometimes it can cause the cursor to flicker
+  while resizing. The browser controls the cursor while dragging, but the browser
+  can sometimes bug out. */
+  cursor: 'unset';
+}
+
+.resizer--resizing::before {
+  opacity: 1;
+}

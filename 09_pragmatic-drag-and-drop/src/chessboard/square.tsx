@@ -2,11 +2,11 @@ import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element
 import { clsx } from 'clsx';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 
+import { canMove } from '../utils/can-move';
+import { isCoordinates } from '../utils/is-coordinates';
+import { isEqualCoordinates } from '../utils/is-equal-coordinates';
+import { isPieceType } from '../utils/is-piece-type';
 import { type Coordinates, PieceRecord } from './chessboard';
-import { canMove } from './utils/can-move';
-import { isCoordinates } from './utils/is-coordinates';
-import { isEqualCoordinates } from './utils/is-equal-coordinates';
-import { isPieceType } from './utils/is-piece-type';
 
 type HoveredState = 'idle' | 'validMove' | 'invalidMove';
 

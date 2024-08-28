@@ -1,4 +1,4 @@
-import { Coordinates, PieceRecord, PieceType } from '../chessboard';
+import { Coordinates, PieceRecord, PieceType } from '../chessboard/chessboard';
 import { isEqualCoordinates } from './is-equal-coordinates';
 
 type CanMoveOptions = {

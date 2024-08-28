@@ -1,4 +1,4 @@
-import { PieceType } from '../chessboard';
+import { PieceType } from '../chessboard/chessboard';
 
 export const isPieceType = (value: unknown): value is PieceType => {
   const pieceTypes: PieceType[] = ['king', 'pawn'];

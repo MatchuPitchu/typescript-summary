@@ -2,14 +2,16 @@ import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/ad
 import { clsx } from 'clsx';
 import { type ReactElement, useEffect, useState } from 'react';
 
-import king from './icons/king.png';
-import pawn from './icons/pawn.png';
+import king from '../icons/king.png';
+import pawn from '../icons/pawn.png';
+import { canMove } from '../utils/can-move';
+import { isCoordinates } from '../utils/is-coordinates';
+import { isEqualCoordinates } from '../utils/is-equal-coordinates';
+import { isPieceType } from '../utils/is-piece-type';
 import { Piece } from './piece';
 import { Square } from './square';
-import { canMove } from './utils/can-move';
-import { isCoordinates } from './utils/is-coordinates';
-import { isEqualCoordinates } from './utils/is-equal-coordinates';
-import { isPieceType } from './utils/is-piece-type';
+
+import './chessboard.css';
 
 export type Coordinates = [number, number];
 
