@@ -1,17 +1,22 @@
-.table {
+.table-container {
   width: 100%;
+  max-width: 100dvw;
+  overflow-x: auto;
+}
+
+.table {
+  width: max-content;
+  border-collapse: collapse;
+  overflow: hidden; /* to cut overflow e.g. for resizer on last th */
 }
 
 .th {
   border-bottom: 2px solid #ffffff;
-  /* Need position:relative so our drop indicator (which uses position:absolute) can be
-	 correctly positioned inside */
-  position: relative;
-  /* using border box sizing as that is what we will be applying as the width for `--local-resizing-width` */
-  width: var(--local-resizing-width);
+  position: relative; /* important to position absolute drop indicator*/
   box-sizing: border-box;
-  padding: 8px;
+  text-align: left;
   white-space: nowrap;
+  padding: 8px;
 }
 
 .th--dragging {
@@ -25,9 +30,8 @@
   top: 0;
   right: calc(-1 * calc(var(--resizer-width) / 2));
   width: var(--resizer-width);
-  height: var(--table-height, 100px);
+  height: var(--table-height);
   cursor: col-resize;
-  flex-grow: 0;
 }
 
 .resizer::before {
@@ -40,6 +44,10 @@
   width: var(--line-width);
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+.th:last-child .resizer::before {
+  left: calc(50% - calc(var(--line-width)));
 }
 
 .resizer:hover::before {
@@ -55,4 +63,9 @@
 
 .resizer--resizing::before {
   opacity: 1;
+}
+
+.td {
+  text-align: left;
+  padding: 8px;
 }

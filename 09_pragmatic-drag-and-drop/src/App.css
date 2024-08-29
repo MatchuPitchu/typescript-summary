@@ -1,12 +1,13 @@
 #root {
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  width: min(800px, 100%);
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 .app {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 15rem;
+  padding: 2rem;
 }
