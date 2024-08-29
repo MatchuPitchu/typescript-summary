@@ -1,3 +1,6 @@
+// import { autoScrollForElements } from '@atlaskit/pragmatic-drag-and-drop-auto-scroll/element';
+// import { unsafeOverflowAutoScrollForElements } from '@atlaskit/pragmatic-drag-and-drop-auto-scroll/unsafe-overflow/element';
+// import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 import { useEffect, useRef } from 'react';
 
 import { Th } from './th';
@@ -23,6 +26,36 @@ export const Table = () => {
     const height = tableRef.current.getBoundingClientRect().height;
     tableRef.current.style.setProperty('--table-height', `${height}px`);
   }, []); // recompute table height when changes occur that impacts the height
+
+  // Notiz: Nur Versuch, funktioniert nicht
+  // Ziel: korrektes Resizing, wenn mit Maus außerhalb von Table Container
+  // useEffect(() => {
+  //   if (!tableContainerRef.current) return;
+
+  //   return combine(
+  //     autoScrollForElements({
+  //       element: tableContainerRef.current,
+  //     }),
+  //     /**
+  //      * Enabling scrolling when outside an element - in the overflow
+  //      * @see https://atlassian.design/components/pragmatic-drag-and-drop/optional-packages/auto-scroll/unsafe-overflow-scrolling
+  //      */
+  //     unsafeOverflowAutoScrollForElements({
+  //       element: tableContainerRef.current,
+  //       getOverflow: () => ({
+  //         // When will scroll on the top edge occur?
+  //         fromTopEdge: {
+  //           top: 10, // for 10px above the top edge
+  //           right: 10, // up to 10px on the right hand side of the top edge
+  //           left: 10, // up to 10px on the left hand side of the top edge
+  //           // bottom: not allowed → the hitbox will stretch down into the element
+  //           // on the left and right and sides of the top edge by the same size as the
+  //           // 'over element' scrolling hitbox
+  //         },
+  //       }),
+  //     }),
+  //   );
+  // }, []);
 
   return (
     <div className="table-container">

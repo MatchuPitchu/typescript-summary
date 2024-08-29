@@ -4,8 +4,6 @@ import { preventUnhandled } from '@atlaskit/pragmatic-drag-and-drop/prevent-unha
 import { clsx } from 'clsx';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
-import { scrollJustEnoughIntoView } from '../utils/scroll-just-enough-into-view';
-
 type Edge = 'bottom' | 'left' | 'right' | 'top';
 
 type HeaderState =

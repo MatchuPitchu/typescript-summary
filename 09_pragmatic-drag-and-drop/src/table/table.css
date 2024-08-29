@@ -25,7 +25,7 @@
 }
 
 .resizer {
-  --resizer-width: 24px;
+  --resizer-width: 12px;
   position: absolute;
   top: 0;
   right: calc(-1 * calc(var(--resizer-width) / 2));
