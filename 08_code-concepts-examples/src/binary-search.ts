@@ -1,5 +1,7 @@
 /**
  * Big O = O(log(n))
+ *
+ * Needs a sorted array to work properly.
  */
 const binarySearchService = () => {
   let totalSteps = 0;
